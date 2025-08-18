@@ -1,0 +1,18 @@
+services:
+  ayllu.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=80
+      - ASPNETCORE_HTTPS_PORTS=81
+      - ConnectionStrings__DefaultConnection=Server=db;Database=ayllu;User Id=sa;Password=${DBPASSWORD};TrustServerCertificate=True;
+      - JwtSettings__SecretKey=${JWT_SECRET_KEY}
+      - JwtSettings__Issuer="AylluIssuer"
+      - JwtSettings__Audience="AylluAudience"
+    ports:
+      - "800:80"
+      - "801:81"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

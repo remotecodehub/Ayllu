@@ -1,0 +1,6 @@
+@Ayllu.Api_HostAddress = http://localhost:5268
+
+GET {{Ayllu.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

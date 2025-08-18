@@ -1,0 +1,20 @@
+﻿################################################################################
+# Este arquivo .gitignore foi criado automaticamente pelo Microsoft(R) Visual Studio.
+################################################################################
+
+/.env
+/.vs/Ayluu
+/obj/Docker
+/src/Ayllu.Api/obj
+/src/Ayllu.Application/obj
+/src/Ayllu.Composition/obj
+/src/Ayllu.Domain/obj
+/src/Ayllu.Web/obj
+/src/Ayllu.Infrastructure/obj
+/obj
+/src/Ayllu.Api/bin/Debug/net9.0
+/src/Ayllu.Application/bin/Debug/net9.0
+/src/Ayllu.Composition/bin/Debug/net9.0
+/src/Ayllu.Domain/bin/Debug/net9.0
+/src/Ayllu.Infrastructure/bin/Debug/net9.0
+/src/Ayllu.Web/bin/Debug/net9.0
