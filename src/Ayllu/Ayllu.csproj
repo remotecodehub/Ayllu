@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.17763.0</TargetFrameworks>
+    <TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks> 
     <OutputType>Exe</OutputType>
     <RootNamespace>Ayllu</RootNamespace>
     <UseMaui>true</UseMaui>
@@ -15,14 +14,9 @@
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>
     <RuntimeIdentifiers Condition="'$(TargetFramework)' == 'net8.0-android'">android-arm64;android-arm;android-x86;android-x64</RuntimeIdentifiers>
-    <RuntimeIdentifiers Condition="'$(TargetFramework)' == 'net8.0-ios'">ios-arm64;iossimulator-arm64;iossimulator-x64</RuntimeIdentifiers>
-    <RuntimeIdentifiers Condition="'$(TargetFramework)' == 'net8.0-maccatalyst'">maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers>
-    <RuntimeIdentifiers Condition="'$(TargetFramework)' == 'net8.0-windows10.0.17763.0'">win10-x64;win10-arm64</RuntimeIdentifiers>
+    <RuntimeIdentifiers Condition="'$(TargetFramework)' == 'net8.0-ios'">ios-arm64;iossimulator-arm64;iossimulator-x64</RuntimeIdentifiers> 
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">24.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">7.0.0.0</SupportedOSPlatformVersion>
-    <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion> 
     <DefaultLanguage>pt-BR</DefaultLanguage>
     <Version>0.0.1.0</Version>
     <Language>pt-BR</Language>
