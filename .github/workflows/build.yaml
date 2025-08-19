@@ -23,10 +23,7 @@ jobs:
         uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '16.2'
-
-      - name: Ensure Docker is running
-        run: docker info
-      
+           
       - name: Restore packages
         run: dotnet restore Ayllu.sln
 

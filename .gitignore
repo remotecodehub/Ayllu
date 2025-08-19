@@ -19,3 +19,4 @@
 **/*.ear
 **/*.iml
 /src/Ayllu.Github.Client/Github/Client/kiota-lock.json
+/.vs/Ayllu
