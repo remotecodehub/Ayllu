@@ -14,7 +14,7 @@ jobs:
       matrix:
         target:
           - { framework: net8.0-android }
-          - { framework: net8.0-ios, runtime: iossimulator-arm64 }
+          - { framework: net8.0-ios }
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
@@ -31,7 +31,7 @@ jobs:
         run: dotnet restore ${{ github.workspace }}/src/Ayllu/Ayllu.csproj
 
       - name: Build
-        run: dotnet build ${{ github.workspace }}/src/Ayllu/Ayllu.csproj --configuration Release --framework ${{ matrix.target.framework }} ${{ matrix.target.runtime && format('--runtime {0}', matrix.target.runtime) }} --no-restore
+        run: dotnet build ${{ github.workspace }}/src/Ayllu/Ayllu.csproj --configuration Release --framework ${{ matrix.target.framework }} --no-restore
 
   build-web:
     runs-on: macos-15
