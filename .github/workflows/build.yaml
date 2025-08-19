@@ -10,6 +10,12 @@ on:
 jobs: 
   build:
     runs-on: macos-latest
+    strategy:
+      matrix:
+        target:
+          - { framework: net8.0-android }
+          - { framework: net8.0-ios, runtime: iossimulator-arm64 }
+          - { framework: net8.0 }
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
@@ -18,15 +24,15 @@ jobs:
 
       - name: Instalar workloads MAUI
         run: dotnet workload install maui
-           
+
       - name: Restore workloads
-        run: dotnet workload restore 
+        run: dotnet workload restore
 
       - name: Restore packages
-        run: dotnet restore ${{ github.workspace }}/Ayllu.sln 
-          
+        run: dotnet restore ${{ github.workspace }}/Ayllu.sln
+
       - name: Build
-        run: dotnet build ${{ github.workspace }}/Ayllu.sln --configuration Release --no-restore  
-          
+        run: dotnet build ${{ github.workspace }}/Ayllu.sln --configuration Release --framework ${{ matrix.target.framework }} ${{ matrix.target.runtime && format('--runtime {0}', matrix.target.runtime) }} --no-restore
+
 
   
