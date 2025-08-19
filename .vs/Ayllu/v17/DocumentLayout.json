@@ -1,0 +1,374 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\RemoteCodeHub\\Ayllu\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F2EDFE53-22D8-4253-9061-C7A181AD1B3D}|workflows{F2EDFE53-22D8-4253-9061-C7A181AD1B3D}|D:\\RemoteCodeHub\\Ayllu\\.github\\workflows\\build.yaml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F2EDFE53-22D8-4253-9061-C7A181AD1B3D}|workflows{F2EDFE53-22D8-4253-9061-C7A181AD1B3D}|solutionrelative:.github\\workflows\\build.yaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54ACB41B-134C-4C67-89C3-5692359CB228}|src\\Ayllu.Github.Client\\Ayllu.Github.Client.csproj|d:\\remotecodehub\\ayllu\\src\\ayllu.github.client\\ayllu.github.client.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{54ACB41B-134C-4C67-89C3-5692359CB228}|src\\Ayllu.Github.Client\\Ayllu.Github.Client.csproj|solutionrelative:src\\ayllu.github.client\\ayllu.github.client.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|d:\\remotecodehub\\ayllu\\src\\ayllu.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|solutionrelative:src\\ayllu.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|d:\\remotecodehub\\ayllu\\src\\ayllu.web\\ayllu.web.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|solutionrelative:src\\ayllu.web\\ayllu.web.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|d:\\remotecodehub\\ayllu\\src\\ayllu.web\\ayllu.web.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|solutionrelative:src\\ayllu.web\\ayllu.web.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|d:\\remotecodehub\\ayllu\\src\\ayllu.web\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|solutionrelative:src\\ayllu.web\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|d:\\remotecodehub\\ayllu\\src\\ayllu.web\\app.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|solutionrelative:src\\ayllu.web\\app.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|d:\\remotecodehub\\ayllu\\src\\ayllu.web\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|solutionrelative:src\\ayllu.web\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|d:\\remotecodehub\\ayllu\\src\\ayllu.web\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|solutionrelative:src\\ayllu.web\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|d:\\remotecodehub\\ayllu\\src\\ayllu.web\\components\\pages\\weather.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|solutionrelative:src\\ayllu.web\\components\\pages\\weather.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|d:\\remotecodehub\\ayllu\\src\\ayllu.web\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|solutionrelative:src\\ayllu.web\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|d:\\remotecodehub\\ayllu\\src\\ayllu.web\\components\\pages\\counter.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|solutionrelative:src\\ayllu.web\\components\\pages\\counter.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|d:\\remotecodehub\\ayllu\\src\\ayllu.web\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29FF4418-8F0E-4496-9DA7-241D5E3683DE}|src\\Ayllu.Web\\Ayllu.Web.csproj|solutionrelative:src\\ayllu.web\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2EDFE53-22D8-4253-9061-C7A181AD1B3D}|workflows{F2EDFE53-22D8-4253-9061-C7A181AD1B3D}|D:\\RemoteCodeHub\\Ayllu\\.github\\workflows\\link-feature-to-parent.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F2EDFE53-22D8-4253-9061-C7A181AD1B3D}|workflows{F2EDFE53-22D8-4253-9061-C7A181AD1B3D}|solutionrelative:.github\\workflows\\link-feature-to-parent.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\RemoteCodeHub\\Ayllu\\src\\Aullu\\Components\\Pages\\Home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\Aullu\\Components\\Pages\\Home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cf577b8c-4134-11d2-83e5-00c04f9902c1}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{f2e84780-2af1-11d1-a7fa-00a0c9110051}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{90243340-bd7a-11d0-93ef-00a0c90f2734}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{4a18f9d0-b838-11d0-93eb-00a0c90f2734}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0504ff91-9d61-11d0-a794-00a0c9110051}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{797f5b3d-853a-4854-a9f2-c488bac2661b}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:136:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:137:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:138:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:368611929:0:{83107a3e-496a-485e-b455-16ddb978e55e}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1155921687:0:{83107a3e-496a-485e-b455-16ddb978e55e}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:12:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:254354193:0:{71f361cc-493f-47c0-923f-f2570b6f8618}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:36:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:11:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 379,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Ayllu.Github.Client",
+              "DocumentMoniker": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Github.Client\\Ayllu.Github.Client.csproj",
+              "RelativeDocumentMoniker": "src\\Ayllu.Github.Client\\Ayllu.Github.Client.csproj",
+              "ToolTip": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Github.Client\\Ayllu.Github.Client.csproj",
+              "RelativeToolTip": "src\\Ayllu.Github.Client\\Ayllu.Github.Client.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-08-19T12:04:23.813Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Ayllu.Web",
+              "DocumentMoniker": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\Ayllu.Web.csproj",
+              "RelativeDocumentMoniker": "src\\Ayllu.Web\\Ayllu.Web.csproj",
+              "ToolTip": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\Ayllu.Web.csproj",
+              "RelativeToolTip": "src\\Ayllu.Web\\Ayllu.Web.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-08-19T10:39:59.365Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "App.razor",
+              "DocumentMoniker": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\App.razor",
+              "RelativeDocumentMoniker": "src\\Ayllu.Web\\App.razor",
+              "ToolTip": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\App.razor",
+              "RelativeToolTip": "src\\Ayllu.Web\\App.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-19T10:01:04.076Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\Program.cs",
+              "RelativeDocumentMoniker": "src\\Ayllu.Web\\Program.cs",
+              "ToolTip": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\Program.cs",
+              "RelativeToolTip": "src\\Ayllu.Web\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T09:55:42.958Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Ayllu.Web",
+              "DocumentMoniker": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\Ayllu.Web.csproj",
+              "RelativeDocumentMoniker": "src\\Ayllu.Web\\Ayllu.Web.csproj",
+              "ToolTip": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\Ayllu.Web.csproj",
+              "RelativeToolTip": "src\\Ayllu.Web\\Ayllu.Web.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-08-19T09:14:55.636Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "build.yaml",
+              "DocumentMoniker": "D:\\RemoteCodeHub\\Ayllu\\.github\\workflows\\build.yaml",
+              "RelativeDocumentMoniker": ".github\\workflows\\build.yaml",
+              "ToolTip": "D:\\RemoteCodeHub\\Ayllu\\.github\\workflows\\build.yaml",
+              "RelativeToolTip": ".github\\workflows\\build.yaml",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAADUAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2025-08-19T02:29:40.139Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "App.razor.cs",
+              "DocumentMoniker": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\App.razor.cs",
+              "RelativeDocumentMoniker": "src\\Ayllu.Web\\App.razor.cs",
+              "ToolTip": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\App.razor.cs",
+              "RelativeToolTip": "src\\Ayllu.Web\\App.razor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T10:00:45.453Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MainLayout.razor",
+              "DocumentMoniker": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\Components\\Layout\\MainLayout.razor",
+              "RelativeDocumentMoniker": "src\\Ayllu.Web\\Components\\Layout\\MainLayout.razor",
+              "ToolTip": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\Components\\Layout\\MainLayout.razor",
+              "RelativeToolTip": "src\\Ayllu.Web\\Components\\Layout\\MainLayout.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-19T09:58:03.386Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Weather.razor",
+              "DocumentMoniker": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\Components\\Pages\\Weather.razor",
+              "RelativeDocumentMoniker": "src\\Ayllu.Web\\Components\\Pages\\Weather.razor",
+              "ToolTip": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\Components\\Pages\\Weather.razor",
+              "RelativeToolTip": "src\\Ayllu.Web\\Components\\Pages\\Weather.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-19T09:57:20.634Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Home.razor",
+              "DocumentMoniker": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\Components\\Pages\\Home.razor",
+              "RelativeDocumentMoniker": "src\\Ayllu.Web\\Components\\Pages\\Home.razor",
+              "ToolTip": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\Components\\Pages\\Home.razor",
+              "RelativeToolTip": "src\\Ayllu.Web\\Components\\Pages\\Home.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-19T09:57:18.199Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Counter.razor",
+              "DocumentMoniker": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\Components\\Pages\\Counter.razor",
+              "RelativeDocumentMoniker": "src\\Ayllu.Web\\Components\\Pages\\Counter.razor",
+              "ToolTip": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\Components\\Pages\\Counter.razor",
+              "RelativeToolTip": "src\\Ayllu.Web\\Components\\Pages\\Counter.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-19T09:57:04.77Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "index.html",
+              "DocumentMoniker": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\wwwroot\\index.html",
+              "RelativeDocumentMoniker": "src\\Ayllu.Web\\wwwroot\\index.html",
+              "ToolTip": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\wwwroot\\index.html",
+              "RelativeToolTip": "src\\Ayllu.Web\\wwwroot\\index.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-08-19T09:45:08.633Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "_Imports.razor",
+              "DocumentMoniker": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\_Imports.razor",
+              "RelativeDocumentMoniker": "src\\Ayllu.Web\\_Imports.razor",
+              "ToolTip": "D:\\RemoteCodeHub\\Ayllu\\src\\Ayllu.Web\\_Imports.razor",
+              "RelativeToolTip": "src\\Ayllu.Web\\_Imports.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-19T09:16:34.47Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{a80febb4-e7e0-4147-b476-21aaf2453969}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "link-feature-to-parent.yml",
+              "DocumentMoniker": "D:\\RemoteCodeHub\\Ayllu\\.github\\workflows\\link-feature-to-parent.yml",
+              "RelativeDocumentMoniker": ".github\\workflows\\link-feature-to-parent.yml",
+              "ToolTip": "D:\\RemoteCodeHub\\Ayllu\\.github\\workflows\\link-feature-to-parent.yml",
+              "RelativeToolTip": ".github\\workflows\\link-feature-to-parent.yml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2025-08-19T09:12:14.112Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:40:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Home.razor",
+              "DocumentMoniker": "D:\\RemoteCodeHub\\Ayllu\\src\\Aullu\\Components\\Pages\\Home.razor",
+              "RelativeDocumentMoniker": "src\\Aullu\\Components\\Pages\\Home.razor",
+              "ToolTip": "D:\\RemoteCodeHub\\Ayllu\\src\\Aullu\\Components\\Pages\\Home.razor",
+              "RelativeToolTip": "src\\Aullu\\Components\\Pages\\Home.razor",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-19T02:50:20.859Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

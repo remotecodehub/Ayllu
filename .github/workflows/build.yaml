@@ -1,0 +1,66 @@
+name: "Build"
+
+on:
+  push:
+    branches: 
+      - main   
+  pull_request:  
+  workflow_dispatch:
+
+jobs: 
+  build-mobile:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        target:
+          - { framework: net8.0-android }
+          - { framework: net8.0-ios, runtime: iossimulator-arm64 }
+      fail-fast: false
+     
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Setup Xcode 16.2
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '16.2'
+      
+      - name: Instalar workloads MAUI
+        run: dotnet workload install maui
+
+      - name: Restore workloads
+        run: dotnet workload restore
+
+      - name: Restore packages
+        run: dotnet restore ${{ github.workspace }}/src/Ayllu/Ayllu.csproj
+
+      - name: Build
+        run: dotnet build ${{ github.workspace }}/src/Ayllu/Ayllu.csproj --configuration Release --framework ${{ matrix.target.framework }} ${{ matrix.target.runtime && format('--runtime {0}', matrix.target.runtime) }} --no-restore
+
+  build-web:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Instalar workloads MAUI
+        run: dotnet workload install maui
+
+      - name: Restore workloads
+        run: dotnet workload restore
+
+      - name: Restore packages
+        run: dotnet restore ${{ github.workspace }}/src/Ayllu.Web/Ayllu.Web.csproj
+
+      - name: Build
+        run: dotnet build ${{ github.workspace }}/src/Ayllu.Web/Ayllu.Web.csproj --configuration Release --framework net8.0 --no-restore
+  
+   
+
+
+  
