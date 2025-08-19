@@ -31,7 +31,7 @@ jobs:
         run: dotnet restore ${{ github.workspace }}/src/Ayllu/Ayllu.csproj  
           
       - name: Build
-        run: dotnet build ${{ github.workspace }}/src/Ayllu/Ayllu.csproj --framework net8.0-iossimulator --runtime iossimulator-arm64 --configuration Release --no-restore  
+        run: dotnet build ${{ github.workspace }}/src/Ayllu/Ayllu.csproj --framework net8.0-ios --runtime iossimulator-arm64 --configuration Release --no-restore  
 
   build-mac:
     runs-on: macos-latest
@@ -87,6 +87,9 @@ jobs:
         with:
           dotnet-version: 8.0.x
    
+      - name: Install .NET Workloads (MAUI)
+        run: dotnet workload install maui --ignore-failed-sources
+
       - name: Restore workloads
         run: dotnet workload restore 
 
@@ -103,7 +106,7 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
-   
+      
       - name: Restore workloads
         run: dotnet workload restore 
 

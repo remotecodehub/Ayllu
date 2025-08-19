@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.17763.0</TargetFrameworks>
-    
     <OutputType>Exe</OutputType>
     <RootNamespace>Ayllu</RootNamespace>
     <UseMaui>true</UseMaui>
@@ -11,19 +10,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <EnableDefaultCssItems>false</EnableDefaultCssItems>
     <Nullable>enable</Nullable>
-
-    <!-- Display name -->
     <ApplicationTitle>Ayllu</ApplicationTitle>
-
-    <!-- App Identifier -->
     <ApplicationId>com.remotecodehub.ayllu</ApplicationId>
-
-    <!-- Versions -->
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>
-
-
-
     <RuntimeIdentifiers Condition="'$(TargetFramework)' == 'net8.0-android'">android-arm64;android-arm;android-x86;android-x64</RuntimeIdentifiers>
     <RuntimeIdentifiers Condition="'$(TargetFramework)' == 'net8.0-ios'">ios-arm64;iossimulator-arm64;iossimulator-x64</RuntimeIdentifiers>
     <RuntimeIdentifiers Condition="'$(TargetFramework)' == 'net8.0-maccatalyst'">maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers>
@@ -41,20 +31,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- App Icon -->
     <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
-
-    <!-- Splash Screen -->
     <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
-
-    <!-- Images -->
     <MauiImage Include="Resources\Images\*" />
     <MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
-
-    <!-- Custom Fonts -->
     <MauiFont Include="Resources\Fonts\*" />
-
-    <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
     <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 
@@ -82,5 +63,5 @@
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
- 
+
 </Project>
