@@ -26,10 +26,7 @@ jobs:
            
       - name: Restore packages
         run: dotnet restore Ayllu.sln
-
-      - name: Restore tools
-        run: dotnet tool restore Ayllu.sln
-
+          
       - name: Build
         run: dotnet build --configuration Release --no-restore Ayllu.sln
 
