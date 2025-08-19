@@ -1,0 +1,44 @@
+name: "Feature"
+description: "Crie uma feature vinculada a um conjunto de features"
+title: "[FEATURE] "
+labels: ["feature"]
+projects: ["default"]
+assignees: []
+type: "FEATURE"
+
+body:
+  - type: input
+    id: parent-issue
+    attributes:
+      label: Issue Pai (Feature Set)
+      description: "Número da issue do Feature Set ao qual esta feature pertence. Exemplo: 42"
+      placeholder: "42"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Detalhes da Implementação
+      description: |
+        Descreva o que deve ser implementado nesta feature.
+      placeholder: "Explicar claramente o escopo da feature."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Etapas do Desenvolvimento
+      description: |
+        Liste as etapas da feature em formato de checklist.  
+        Exemplo:
+        - [ ] Criar endpoint
+        - [ ] Implementar testes
+        - [ ] Documentar
+      placeholder: |
+        - [ ] Etapa 1
+        - [ ] Etapa 2
+        - [ ] Etapa 3
+    validations:
+      required: false
