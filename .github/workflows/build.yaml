@@ -7,7 +7,27 @@ on:
   pull_request:  
   workflow_dispatch:
 
-jobs:
+jobs: 
+  build-android:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Instalar workloads MAUI
+        run: dotnet workload install maui
+           
+      - name: Restore workloads
+        run: dotnet workload restore 
+
+      - name: Restore packages
+        run: dotnet restore ${{ github.workspace }}/src/Ayllu/Ayllu.csproj 
+          
+      - name: Build
+        run: dotnet build ${{ github.workspace }}/src/Ayllu/Ayllu.csproj --framework net8.0-android --configuration Release --no-restore  
+
   build-ios:
     runs-on: macos-latest
     steps:
@@ -58,47 +78,6 @@ jobs:
       - name: Build
         run: dotnet build ${{ github.workspace }}/src/Ayllu/Ayllu.csproj --framework net8.0-maccatalyst --configuration Release --no-restore  
          
-         
-  build-android:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.0.x
-
-      - name: Instalar workloads MAUI
-        run: dotnet workload install maui
-           
-      - name: Restore workloads
-        run: dotnet workload restore 
-
-      - name: Restore packages
-        run: dotnet restore ${{ github.workspace }}/src/Ayllu/Ayllu.csproj 
-          
-      - name: Build
-        run: dotnet build ${{ github.workspace }}/src/Ayllu/Ayllu.csproj --framework net8.0-android --configuration Release --no-restore  
-
-  build-windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.0.x
-   
-      - name: Install .NET Workloads (MAUI)
-        run: dotnet workload install maui --ignore-failed-sources
-
-      - name: Restore workloads
-        run: dotnet workload restore 
-
-      - name: Restore packages
-        run: dotnet restore ${{ github.workspace }}/src/Ayllu/Ayllu.csproj  
-          
-      - name: Build
-        run: dotnet build ${{ github.workspace }}/src/Ayllu/Ayllu.csproj --framework net8.0-windows10.0.17763.0 --configuration Release --no-restore  
-
   build-web:
     runs-on: macos-latest
     steps:
@@ -115,3 +94,23 @@ jobs:
           
       - name: Build
         run: dotnet build ${{ github.workspace }}/src/Ayllu.Web/Ayllu.Web.csproj --configuration Release --no-restore    
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+   
+      - name: Install .NET Workloads (MAUI)
+        run: dotnet workload install maui maui-windows --ignore-failed-sources
+
+      - name: Restore workloads
+        run: dotnet workload restore 
+
+      - name: Restore packages
+        run: dotnet restore ${{ github.workspace }}/src/Ayllu/Ayllu.csproj  
+          
+      - name: Build
+        run: dotnet build ${{ github.workspace }}/src/Ayllu/Ayllu.csproj --framework net8.0-windows10.0.17763.0 --configuration Release --no-restore  
