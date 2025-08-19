@@ -46,10 +46,10 @@ jobs:
       run: dotnet workload restore
 
     - name: Restore
-      run: dotnet restore Ayllu.sln
+      run: dotnet restore 
 
     - name: Build
-      run: dotnet build --configuration Release --no-restore Ayllu.sln
+      run: dotnet build --configuration Release --no-restore 
 
     # - name: Test
     #   run: dotnet test
