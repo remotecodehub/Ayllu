@@ -5,8 +5,8 @@ on:
     branches: 
       - main   
   pull_request:  
-
   workflow_dispatch:
+
 jobs:
   build-ios:
     runs-on: macos-latest
@@ -24,8 +24,11 @@ jobs:
         with:
           xcode-version: '16.2'
            
+      - name: Restore workloads
+        run: dotnet workload restore 
+   
       - name: Restore packages
-        run: dotnet restore ${{ github.workspace }}/src/Aylly/Ayllu.csproj --framework net8.0-ios
+        run: dotnet restore ${{ github.workspace }}/src/Aylly/Ayllu.csproj  
           
       - name: Build
         run: dotnet build ${{ github.workspace }}/src/Aylly/Ayllu.csproj --framework net8.0-ios --configuration Release --no-restore  
@@ -46,8 +49,11 @@ jobs:
         with:
           xcode-version: '16.2'
            
+      - name: Restore workloads
+        run: dotnet workload restore 
+        
       - name: Restore packages
-        run: dotnet restore ${{ github.workspace }}/src/Aylly/Ayllu.csproj --framework net8.0-maccatalyst
+        run: dotnet restore ${{ github.workspace }}/src/Aylly/Ayllu.csproj  
           
       - name: Build
         run: dotnet build ${{ github.workspace }}/src/Aylly/Ayllu.csproj --framework net8.0-maccatalyst --configuration Release --no-restore  
@@ -63,9 +69,12 @@ jobs:
 
       - name: Instalar workloads MAUI
         run: dotnet workload install maui
+           
+      - name: Restore workloads
+        run: dotnet workload restore 
 
       - name: Restore packages
-        run: dotnet restore ${{ github.workspace }}/src/Aylly/Ayllu.csproj --framework net8.0-android
+        run: dotnet restore ${{ github.workspace }}/src/Aylly/Ayllu.csproj 
           
       - name: Build
         run: dotnet build ${{ github.workspace }}/src/Aylly/Ayllu.csproj --framework net8.0-android --configuration Release --no-restore  
@@ -77,12 +86,12 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
-
-      - name: Instalar workloads MAUI
-        run: dotnet workload install maui
+   
+      - name: Restore workloads
+        run: dotnet workload restore 
 
       - name: Restore packages
-        run: dotnet restore ${{ github.workspace }}/src/Aylly/Ayllu.csproj --framework net8.0-windows10.0.17763.0
+        run: dotnet restore ${{ github.workspace }}/src/Aylly/Ayllu.csproj  
           
       - name: Build
         run: dotnet build ${{ github.workspace }}/src/Aylly/Ayllu.csproj --framework net8.0-windows10.0.17763.0 --configuration Release --no-restore  
@@ -94,8 +103,8 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
-
-      - name: Instalar workloads blazor
+   
+      - name: Restore workloads
         run: dotnet workload restore 
 
       - name: Restore packages
