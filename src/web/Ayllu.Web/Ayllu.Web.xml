@@ -1,0 +1,397 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ayllu.Web</name>
+    </assembly>
+    <members>
+        <member name="T:Ayllu.Web.Controllers.v1.AntithesisController">
+            <summary>
+            Handles HTTP requests for managing antitheses within a specific dialectic.
+            </summary>
+            <remarks>This controller provides endpoints for creating and listing antitheses associated with a given
+            dialectic. All routes are scoped to a particular dialectic, identified by the 'dialecticId' route parameter.
+            Intended for use in RESTful API scenarios.</remarks>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.AntithesisController.#ctor(MediatR.IMediator)">
+            <summary>
+            Handles HTTP requests for managing antitheses within a specific dialectic.
+            </summary>
+            <remarks>This controller provides endpoints for creating and listing antitheses associated with a given
+            dialectic. All routes are scoped to a particular dialectic, identified by the 'dialecticId' route parameter.
+            Intended for use in RESTful API scenarios.</remarks>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.AntithesisController.CreateAntithesis(System.String,Ayllu.Web.Application.Antithesis.Requests.CreateAntithesisRequest,System.Threading.CancellationToken)">
+            <summary>
+            Cria uma antítese associada com a dialética especificada.
+            </summary>
+            <param name="dialecticId">Identificador unico da dialética para que a antitese será adicionada.</param>
+            <param name="request">Objeto da requisição da antitese a ser criada.</param>
+            <param name="cancellationToken">Token de cancelamento da operação.</param>
+            <returns>Uma response com o resultado da criação da antítese.</returns>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.AntithesisController.List(System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+            <summary>
+            Lista antíteses associadas à dialética especificada.
+            </summary>
+            <param name="dialecticId">Identificador unico da dialética para que a antitese será adicionada.</param>
+            <param name="publicOnly">Parametro de query que indica busca de antiteses publicas apenas ou não.</param>
+            <param name="cancellationToken">Token de cancelamento da operação.</param>
+            <returns>Uma response com a lista do resultado da listagem de antíteses.</returns>
+        </member>
+        <member name="T:Ayllu.Web.Controllers.v1.DialecticsController">
+            <summary>
+            Controller for managing dialectics.
+            </summary>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.DialecticsController.#ctor(MediatR.IMediator)">
+            <summary>
+            Controller for managing dialectics.
+            </summary>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.DialecticsController.CreateDialectic(Ayllu.Web.Application.Dialectics.Requests.CreateDialecticRequest,System.Threading.CancellationToken)">
+            <summary>
+            Cria uma nova dialética
+            </summary>
+            <param name="request">Objeto da requisição enviado pelo cliente para criar a nova dialética.</param>
+            <param name="cancellationToken">Token de cancelamento da operação.</param>
+            <returns>Uma response 200 OK com o resultado da criação da dialética.</returns>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.DialecticsController.CloseDialectic(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Fecha a dialética especificada, marcando a como não ativa.
+            </summary>
+            <param name="id">O identificador unico da dialética a ser fechada.</param>
+            <param name="cancellationToken">Token de cancelamento da operação.</param>
+            <returns>Uma response com HTTP status code 200 (Ok) se a operação for bem sucedida.</returns>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.DialecticsController.GetById(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Busca uma dialética associada ao usuario com base no identificador único.
+            </summary>
+            <param name="id">O identificador único da dialética a ser retornada.</param>
+            <param name="cancellationToken">Token de cancelamento da operação.</param>
+            <returns>Uma response com HTTP status code 200 OK que representa o resultado da operação.</returns>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.DialecticsController.GetMyDialectics(System.Threading.CancellationToken)">
+            <summary>
+            Retorna as dialéticas do usuário atual.
+            </summary>
+            <param name="cancellationToken">Token de cancelamento da operação.</param>
+            <returns>Uma response com HTTP status code 200 OK que contém o resultado da operação.</returns>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.DialecticsController.GetFriendsDialectics(System.Threading.CancellationToken)">
+            <summary>
+            Recupera a dialética dos amigos do usuário.
+            </summary>
+            <param name="cancellationToken">Token de cancelamento da operação.</param>
+            <returns>Uma response com HTTP status code 200 OK que representa o resultado da operação.</returns>
+        </member>
+        <member name="T:Ayllu.Web.Controllers.v1.FriendsController">
+            <summary>
+            Controller de autenticação para extender endpoints mapeados pelo Identity.
+            </summary>
+            <param name="mediator">O mediador para enviar comandos e consultas.</param>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.FriendsController.#ctor(MediatR.IMediator)">
+            <summary>
+            Controller de autenticação para extender endpoints mapeados pelo Identity.
+            </summary>
+            <param name="mediator">O mediador para enviar comandos e consultas.</param>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.FriendsController.AddFriendAsync(Ayllu.Web.Application.Identity.Requests.SendUserFriendInviteRequest,System.Threading.CancellationToken)">
+            <summary>
+            Busca usuario atual.
+            </summary>
+            <remarks>Este endpoint requer que o usuário esteja autenticado. A resposta inclui detalhes do usuário
+            associados ao contexto de autenticação atual</remarks>
+            <param name="request">Objeto da requisição enviado no corpo.</param>
+            <param name="cancellationToken">Token de cancelamento da operação.</param>
+            <returns>Uma response <see cref="T:Ayllu.Web.Application.Identity.Responses.UserFriendInviteSentResponse"/> com HTTP status code 200 OK que contém as informações do usuário autenticado.</returns>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.FriendsController.ListFriendsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Retorna lista de usuários com vinculo de amizade com o usuario atual
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ayllu.Web.Controllers.v1.IdentityController">
+            <summary>
+            Controller de autenticação para extender endpoints mapeados pelo Identity.
+            </summary>
+            <param name="mediator">O mediador para enviar comandos e consultas.</param>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.IdentityController.#ctor(MediatR.IMediator)">
+            <summary>
+            Controller de autenticação para extender endpoints mapeados pelo Identity.
+            </summary>
+            <param name="mediator">O mediador para enviar comandos e consultas.</param>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.IdentityController.GetCurrentUserAsync(System.Threading.CancellationToken)">
+            <summary>
+            Busca usuario atual.
+            </summary>
+            <remarks>Este endpoint requer que o usuário esteja autenticado. A resposta inclui detalhes do usuário
+            associados ao contexto de autenticação atual</remarks>
+            <param name="cancellationToken">Token de cancelamento da operação.</param>
+            <returns>Uma response <see cref="T:Ayllu.Web.Application.Identity.Responses.ApplicationUserResponse"/> com HTTP status code 200 OK que contém as informações do usuário autenticado.</returns>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.IdentityController.UpdateCurrentUserAsync(Ayllu.Web.Application.Identity.Requests.UpdateUserRequest,System.Threading.CancellationToken)">
+            <summary>
+            Atualiza o perfil
+            </summary>
+            <remarks>Este endpoint requer que o usuário esteja autenticado. A resposta retorna os detalhes atualizados do usuário, ou uma response apropriada com o erro se a requisição for inválida ou falhar.</remarks>
+            <param name="request">Objeto da requisição com os dados a serem atualizados. Não pode ser nulo.</param>
+            <param name="cancellationToken">Token de cancelamento da operação.</param>
+            <returns>Um <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> contendo um <see cref="T:Ayllu.Web.Application.Common.Results.Result`1"/> com o perfil atualizado no sucesso, ou
+            uma response de erro se a atualização falhar.</returns>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.IdentityController.LogoutUserAsync(System.Threading.CancellationToken)">
+            <summary>
+            Realiza logout.
+            </summary>
+            <remarks>Este endpoint requer que o usuário esteja autenticado. A resposta inclui detalhes do 
+            resultado da operação efetuada se bem sucedida</remarks>
+            <param name="cancellationToken">Token de cancelamento da operação.</param>
+            <returns>Uma response <see cref="T:System.Boolean"/> com HTTP status code 200 OK que informa se o logout foi efetuado.</returns>
+        </member>
+        <member name="T:Ayllu.Web.Controllers.v1.SynthesisController">
+            <summary>
+            Processa solicitações HTTP relacionadas a sínteses dentro de uma dialética específica.
+            </summary>
+            <param name="mediator">O mediador para enviar comandos e consultas.</param>
+            <remarks>Este controlador fornece endpoints para criar e recuperar sínteses associadas a uma determinada dialética. 
+            Todas as rotas são definidas pelo identificador de dialética especificado. 
+            O controlador destina-se a ser usado como parte de uma API RESTful e segue as convenções padrão do ASP.NET Core.</remarks>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.SynthesisController.#ctor(MediatR.IMediator)">
+            <summary>
+            Processa solicitações HTTP relacionadas a sínteses dentro de uma dialética específica.
+            </summary>
+            <param name="mediator">O mediador para enviar comandos e consultas.</param>
+            <remarks>Este controlador fornece endpoints para criar e recuperar sínteses associadas a uma determinada dialética. 
+            Todas as rotas são definidas pelo identificador de dialética especificado. 
+            O controlador destina-se a ser usado como parte de uma API RESTful e segue as convenções padrão do ASP.NET Core.</remarks>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.SynthesisController.CreateSynthesis(System.String,Ayllu.Web.Application.Synthesis.Requests.CreateSynthesisRequest,System.Threading.CancellationToken)">
+            <summary>
+            Cria uma nova síntese associada à dialética especificada.
+            </summary>
+            <param name="dialecticId">Identificador unico da dialética para que a antitese será adicionada.</param>
+            <param name="request">Objeto da requisição da síntese a ser criada.</param>
+            <param name="cancellationToken">Token de cancelamento da operação.</param>
+            <returns>Uma response com o resultado da criação da síntese.</returns>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.SynthesisController.List(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Retorna uma lista de sínteses associadas à dialética especificada e o usuário autenticado.
+            </summary>
+            <param name="dialecticId">Identificador unico da dialética para a qual as sínteses serão retornadas.</param>
+            <param name="cancellationToken">Token de cancelamento da operação.</param>
+            <returns>Uma response com o resultado da listagem das sínteses.</returns>
+        </member>
+        <member name="T:Ayllu.Web.Controllers.v1.ThesisController">
+            <summary>
+            Handles HTTP requests related to thesis resources within a specific dialectic context.
+            </summary>
+            <remarks>This controller provides endpoints for creating and updating thesis entities associated with a given
+            dialectic. All routes are prefixed with 'api/v1/dialectics/{dialecticId}/thesis'.</remarks>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.ThesisController.#ctor(MediatR.IMediator)">
+            <summary>
+            Handles HTTP requests related to thesis resources within a specific dialectic context.
+            </summary>
+            <remarks>This controller provides endpoints for creating and updating thesis entities associated with a given
+            dialectic. All routes are prefixed with 'api/v1/dialectics/{dialecticId}/thesis'.</remarks>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.ThesisController.PublishThesis(Ayllu.Web.Application.Thesis.Requests.CreateThesisRequest,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Publica uma tese associada à dialética especificada.
+            </summary>
+            <param name="request">O objeto da requisição para a criação e publicação da tese associada à dialética. Não pode ser nulo ou vazio.</param>
+            <param name="dialecticId">O identificador único da dialética cuja tese será publicada. Não pode ser nulo ou vazio.</param>
+            <param name="cancellationToken">Token de cancelamento da operação.</param>
+            <returns>Uma response indicando o resultado da operação com HTTP status code 200 OK.</returns>
+        </member>
+        <member name="M:Ayllu.Web.Controllers.v1.ThesisController.UpdateThesis(Ayllu.Web.Application.Thesis.Requests.UpdateThesisRequest,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Atualiza uma tese associada à uma dialética específica.
+            </summary>
+            <param name="request">O objeto da requisição para a atualização da tese associada à dialética. Não pode ser nulo ou vazio.</param>
+            <param name="dialecticId">O identificador único da dialética cuja tese será atualizada. Não pode ser nulo ou vazio.</param>
+            <param name="thesisId">O identificador único da tese a ser atualizada.</param>
+            <param name="cancellationToken">Token de cancelamento da operação.</param>    
+            <returns>Uma response HTTP 200 Ok com o resultado da atualização.</returns>
+        </member>
+        <member name="T:Ayllu.Web.Extensions.WebApplicationExtensions">
+            <summary>
+            Provides extension methods for the <see cref="T:Microsoft.AspNetCore.Builder.WebApplication"/> class to facilitate database migration operations.
+            </summary>
+        </member>
+        <member name="M:Ayllu.Web.Extensions.WebApplicationExtensions.TryMigrateDbAsync(Microsoft.AspNetCore.Builder.WebApplication)">
+            <summary>
+            Attempts to migrate the database using the provided <see cref="T:Microsoft.AspNetCore.Builder.WebApplication"/>.
+            </summary>
+            <param name="app">the <see cref="T:Microsoft.AspNetCore.Builder.WebApplication"/> app instance to migrate</param>
+            <returns></returns>
+        </member>
+        <member name="T:Ayllu.Web.Filters.GlobalExceptionResultFilter">
+            <summary>
+            Global filter for handles errors and exceptions results in all endpoints
+            </summary>
+        </member>
+        <member name="M:Ayllu.Web.Filters.GlobalExceptionResultFilter.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <summary>
+            Handles the exceptions thrown in the application to standardize error responses.
+            </summary>
+            <param name="context">The context of exception thrown</param>
+            <returns>The task completed</returns>
+        </member>
+        <member name="M:Ayllu.Web.Filters.GlobalExceptionResultFilter.OnResultExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate)">
+            <summary>
+            Handles the execution of results to standardize error responses based on HTTP status codes.
+            </summary>
+            <param name="context"></param>
+            <param name="next"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ayllu.Web.Filters.IdentityResultEnvelopeFilter">
+            <summary>
+            An endpoint filter that standardizes successful Identity API responses by wrapping them in a result envelope, while
+            preserving special Identity error payloads and other response types.
+            </summary>
+            <remarks>This filter is intended for use with ASP.NET Core Minimal APIs that utilize Identity. It
+            automatically wraps successful 2xx responses with a result envelope, except for responses with no content or special
+            Identity error payloads (such as two-factor authentication requirements), which are returned unchanged. This helps
+            ensure consistent response formatting for clients consuming the API.</remarks>
+        </member>
+        <member name="M:Ayllu.Web.Filters.IdentityResultEnvelopeFilter.InvokeAsync(Microsoft.AspNetCore.Http.EndpointFilterInvocationContext,Microsoft.AspNetCore.Http.EndpointFilterDelegate)">
+            <summary>
+            Filters the request on identity endpoints
+            </summary>
+            <param name="context"></param>
+            <param name="next"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ayllu.Web.Helpers.CultureHelper">
+            <summary>
+            Culture helper implementation
+            </summary>
+            <param name="accessor"></param>
+        </member>
+        <member name="M:Ayllu.Web.Helpers.CultureHelper.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+            <summary>
+            Culture helper implementation
+            </summary>
+            <param name="accessor"></param>
+        </member>
+        <member name="M:Ayllu.Web.Helpers.CultureHelper.GetCurrentCulture">
+            <summary>
+            Retrieves the culture information from the current HTTP request's Accept-Language header.
+            </summary>
+            <remarks>This method is typically used to determine the preferred culture of the client making the
+            HTTP request. If the Accept-Language header is missing or contains only whitespace, the method defaults to
+            "pt-BR".</remarks>
+            <returns>A string representing the culture specified in the Accept-Language header of the current HTTP request. Returns
+            "pt-BR" if the header is not present or is empty.</returns>
+        </member>
+        <member name="T:Ayllu.Web.Middlewares.GlobalExceptionHandler">
+            <summary>
+            Provides extension methods for configuring a global exception handler in an ASP.NET Core application.
+            </summary>
+            <remarks>The global exception handler middleware captures unhandled exceptions during HTTP request processing
+            and returns standardized JSON error responses. This helps ensure consistent error handling and response formatting
+            across the application. To enable global exception handling, call the UseGlobalExceptionHandler extension method
+            during application startup, typically in the Configure method of Startup.cs. The middleware maps common exception
+            types to appropriate HTTP status codes and error messages.</remarks>
+        </member>
+        <member name="M:Ayllu.Web.Middlewares.GlobalExceptionHandler.UseGlobalExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Configures a global exception handler middleware that returns standardized JSON error responses for unhandled
+            exceptions in the application pipeline.
+            </summary>
+            <remarks>This middleware should be registered early in the application's request pipeline to ensure
+            that unhandled exceptions are consistently caught and formatted. The response will have a content type of
+            "application/json" and will include an error code and message. Existing response content may be overwritten if
+            an exception occurs.</remarks>
+            <param name="app">The application builder used to configure the middleware pipeline. Cannot be null.</param>
+        </member>
+        <member name="T:Ayllu.Web.Transformers.IdentityOpenApiTransformer">
+            <summary>
+            OpenApiTransformer class for Identity endpoints
+            </summary>
+        </member>
+        <member name="M:Ayllu.Web.Transformers.IdentityOpenApiTransformer.TransformAsync(Microsoft.OpenApi.OpenApiOperation,Microsoft.AspNetCore.OpenApi.OpenApiOperationTransformerContext,System.Threading.CancellationToken)">
+            <summary>
+            Transforms the specified OpenAPI operation by updating its summary and description for recognized authentication
+            endpoints.
+            </summary>
+            <remarks>If the operation corresponds to a standard authentication endpoint (such as login, register,
+            or refresh), its summary and description are set to indicate that it is an automatic ASP.NET Identity endpoint.
+            No changes are made for other endpoints.</remarks>
+            <param name="operation">The OpenAPI operation to be transformed. This object may be modified to update its summary and description.</param>
+            <param name="context">The context containing metadata and information about the current operation being transformed.</param>
+            <param name="cancellationToken">A token that can be used to request cancellation of the asynchronous operation.</param>
+            <returns>A task that represents the asynchronous transformation operation.</returns>
+        </member>
+        <member name="T:Ayllu.Web.Utils.Constants">
+            <summary>
+            Class of constant values for the application
+            </summary>
+        </member>
+        <member name="F:Ayllu.Web.Utils.Constants.ApiVersion">
+            <summary>
+            Open API endpoints version
+            </summary>
+        </member>
+        <member name="T:Program">
+            <summary>
+            Auto-generated public partial Program class for top-level statement apps.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Type)">
+            <summary>
+            Generates a documentation comment ID for a type.
+            Example: T:Namespace.Outer+Inner`1 becomes T:Namespace.Outer.Inner`1
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Reflection.PropertyInfo)">
+            <summary>
+            Generates a documentation comment ID for a property.
+            Example: P:Namespace.ContainingType.PropertyName or for an indexer P:Namespace.ContainingType.Item(System.Int32)
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Type,System.String)">
+            <summary>
+            Generates a documentation comment ID for a property given its container type and property name.
+            Example: P:Namespace.ContainingType.PropertyName
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Reflection.MethodInfo)">
+            <summary>
+            Generates a documentation comment ID for a method (or constructor).
+            For example:
+              M:Namespace.ContainingType.MethodName(ParamType1,ParamType2)~ReturnType
+              M:Namespace.ContainingType.#ctor(ParamType)
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.GetTypeDocId(System.Type,System.Boolean,System.Boolean)">
+            <summary>
+            Generates a documentation ID string for a type.
+            This method handles nested types (replacing '+' with '.'),
+            generic types, arrays, pointers, by-ref types, and generic parameters.
+            The <paramref name="includeGenericArguments"/> flag controls whether
+            constructed generic type arguments are emitted, while <paramref name="omitGenericArity"/>
+            controls whether the generic arity marker (e.g. "`1") is appended.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.NormalizeDocId(System.String)">
+            <summary>
+            Normalizes a documentation comment ID to match the compiler-style format.
+            Strips the return type suffix for ordinary methods but retains it for conversion operators.
+            </summary>
+            <param name="docId">The documentation comment ID to normalize.</param>
+            <returns>The normalized documentation comment ID.</returns>
+        </member>
+    </members>
+</doc>

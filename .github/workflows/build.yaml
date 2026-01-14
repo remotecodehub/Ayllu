@@ -35,10 +35,10 @@ jobs:
         run: dotnet workload restore
 
       - name: Restore packages
-        run: dotnet restore ${{ github.workspace }}/src/Ayllu/Ayllu.csproj
+        run: dotnet restore ${{ github.workspace }}/src/mobile/Ayllu/Ayllu.csproj
 
       - name: Build
-        run: dotnet build ${{ github.workspace }}/src/Ayllu/Ayllu.csproj --configuration Release --framework ${{ matrix.target.framework }} ${{ matrix.target.runtime && format('--runtime {0}', matrix.target.runtime) }} --no-restore
+        run: dotnet build ${{ github.workspace }}/src/mobile/Ayllu/Ayllu.csproj --configuration Release --framework ${{ matrix.target.framework }} ${{ matrix.target.runtime && format('--runtime {0}', matrix.target.runtime) }} --no-restore
 
   build-web:
     runs-on: macos-15
@@ -46,19 +46,16 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.0.x
-
-      - name: Instalar workloads MAUI
-        run: dotnet workload install maui
+          dotnet-version: 9.0.x
 
       - name: Restore workloads
         run: dotnet workload restore
 
       - name: Restore packages
-        run: dotnet restore ${{ github.workspace }}/src/Ayllu.Web/Ayllu.Web.csproj
+        run: dotnet restore ${{ github.workspace }}/src/web/Ayllu.Web/Ayllu.Web.csproj
 
       - name: Build
-        run: dotnet build ${{ github.workspace }}/src/Ayllu.Web/Ayllu.Web.csproj --configuration Release --framework net8.0 --no-restore
+        run: dotnet build ${{ github.workspace }}/src/web/Ayllu.Web/Ayllu.Web.csproj --configuration Release --framework net9.0 --no-restore
   
    
 

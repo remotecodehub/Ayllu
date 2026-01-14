@@ -1,0 +1,1080 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Ayllu.Web | v1",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://ayllu.local/"
+    }
+  ],
+  "paths": {
+    "/api/v1/identity/register": {
+      "post": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Registro de usuário",
+        "description": "Cria uma nova conta de usuário.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/identity/login": {
+      "post": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Login do usuário",
+        "description": "Autentica o usuário e retorna tokens de acesso.",
+        "parameters": [
+          {
+            "name": "useCookies",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "useSessionCookies",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/identity/refresh": {
+      "post": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Refresh de token",
+        "description": "Renova o token de acesso utilizando um refresh token válido.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/identity/confirmEmail": {
+      "get": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Confirmar e-mail",
+        "description": "Confirma o endereço de e-mail do usuário.",
+        "operationId": "MapIdentityApi-/api/v1/identity/confirmEmail",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "changedEmail",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/identity/resendConfirmationEmail": {
+      "post": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Tentar confirmar e-mail novamente",
+        "description": "Realiza uma nova tentativa de confirmar o endereço de e-mail do usuário.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResendConfirmationEmailRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/identity/forgotPassword": {
+      "post": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Lembrar senha",
+        "description": "Envia um link de redefinição de senha para o email do usuário.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgotPasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/identity/resetPassword": {
+      "post": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Troca de senha",
+        "description": "Solicita a senha atual e uma nova senha para substituir a senha atual do usuário.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/identity/manage/2fa": {
+      "post": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Segundo fator de autenticação",
+        "description": "Gerencia segundo fator de autenticação do usuário.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TwoFactorRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TwoFactorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/identity/manage/info": {
+      "get": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Informações",
+        "description": "Obtem informações do email do usuário.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InfoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Atualizar email ",
+        "description": "Atualiza o email do usuário solicitando uma senha nova e a senha atual junto ao novo email.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InfoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InfoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/dialectics/{dialecticId}/antitheses": {
+      "post": {
+        "tags": [
+          "Dialectics"
+        ],
+        "summary": "Cria uma antítese associada com a dialética especificada.",
+        "parameters": [
+          {
+            "name": "dialecticId",
+            "in": "path",
+            "description": "Identificador unico da dialética para que a antitese será adicionada.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Token de cancelamento da operação.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAntithesisRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAntithesisRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAntithesisRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Uma response com o resultado da criação da antítese."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Dialectics"
+        ],
+        "summary": "Lista antíteses associadas à dialética especificada.",
+        "parameters": [
+          {
+            "name": "dialecticId",
+            "in": "path",
+            "description": "Identificador unico da dialética para que a antitese será adicionada.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uma response com a lista do resultado da listagem de antíteses."
+          }
+        }
+      }
+    },
+    "/api/v1/dialectics": {
+      "post": {
+        "tags": [
+          "Dialectics"
+        ],
+        "summary": "Cria uma nova dialética",
+        "requestBody": {
+          "description": "Token de cancelamento da operação.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDialecticRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDialecticRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDialecticRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Uma response 200 OK com o resultado da criação da dialética."
+          }
+        }
+      }
+    },
+    "/api/v1/dialectics/{id}/close": {
+      "post": {
+        "tags": [
+          "Dialectics"
+        ],
+        "summary": "Fecha a dialética especificada, marcando a como não ativa.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "O identificador unico da dialética a ser fechada.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uma response com HTTP status code 200 (Ok) se a operação for bem sucedida."
+          }
+        }
+      }
+    },
+    "/api/v1/dialectics/{id}": {
+      "get": {
+        "tags": [
+          "Dialectics"
+        ],
+        "summary": "Busca uma dialética associada ao usuario com base no identificador único.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "O identificador único da dialética a ser retornada.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uma response com HTTP status code 200 OK que representa o resultado da operação."
+          }
+        }
+      }
+    },
+    "/api/v1/dialectics/mine": {
+      "get": {
+        "tags": [
+          "Dialectics"
+        ],
+        "summary": "Retorna as dialéticas do usuário atual.",
+        "responses": {
+          "200": {
+            "description": "Uma response com HTTP status code 200 OK que contém o resultado da operação."
+          }
+        }
+      }
+    },
+    "/api/v1/dialectics/friends": {
+      "get": {
+        "tags": [
+          "Dialectics"
+        ],
+        "summary": "Recupera a dialética dos amigos do usuário.",
+        "responses": {
+          "200": {
+            "description": "Uma response com HTTP status code 200 OK que representa o resultado da operação."
+          }
+        }
+      }
+    },
+    "/api/v1/identity/me": {
+      "get": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Recupera informações sobre o usuário autenticado no momento.",
+        "description": "Este endpoint requer que o usuário esteja autenticado. A resposta inclui detalhes do usuário\n    associados ao contexto de autenticação atual",
+        "responses": {
+          "200": {
+            "description": "Uma response com HTTP status code 200 OK que contém as informações do usuário autenticado."
+          }
+        }
+      }
+    },
+    "/api/v1/dialectics/{dialecticId}/syntheses": {
+      "post": {
+        "tags": [
+          "Dialectics"
+        ],
+        "summary": "Cria uma nova síntese associada à dialética especificada.",
+        "parameters": [
+          {
+            "name": "dialecticId",
+            "in": "path",
+            "description": "Identificador unico da dialética para que a antitese será adicionada.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Token de cancelamento da operação.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSynthesisRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSynthesisRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSynthesisRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Uma response com o resultado da criação da síntese."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Dialectics"
+        ],
+        "summary": "Retorna uma lista de sínteses associadas à dialética especificada e o usuário autenticado.",
+        "parameters": [
+          {
+            "name": "dialecticId",
+            "in": "path",
+            "description": "Identificador unico da dialética para a qual as sínteses serão retornadas.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uma response com o resultado da listagem das sínteses."
+          }
+        }
+      }
+    },
+    "/api/v1/dialectics/{dialecticId}/thesis": {
+      "post": {
+        "tags": [
+          "Dialectics"
+        ],
+        "summary": "Publica uma tese associada à dialética especificada.",
+        "parameters": [
+          {
+            "name": "dialecticId",
+            "in": "path",
+            "description": "O identificador único da dialética cuja tese será publicada. Não pode ser nulo ou vazio.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Token de cancelamento da operação.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateThesisRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateThesisRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateThesisRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Uma response indicando o resultado da operação com HTTP status code 200 OK."
+          }
+        }
+      }
+    },
+    "/api/v1/dialectics/{dialecticId}/thesis/{thesisId}": {
+      "put": {
+        "tags": [
+          "Dialectics"
+        ],
+        "summary": "Atualiza uma tese associada à uma dialética específica.",
+        "parameters": [
+          {
+            "name": "dialecticId",
+            "in": "path",
+            "description": "O identificador único da dialética cuja tese será atualizada. Não pode ser nulo ou vazio.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "thesisId",
+            "in": "path",
+            "description": "O identificador único da tese a ser atualizada.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Token de cancelamento da operação.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateThesisRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateThesisRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateThesisRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Uma response HTTP 200 Ok com o resultado da atualização."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccessTokenResponse": {
+        "required": [
+          "accessToken",
+          "expiresIn",
+          "refreshToken"
+        ],
+        "type": "object",
+        "properties": {
+          "tokenType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "accessToken": {
+            "type": "string"
+          },
+          "expiresIn": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int64"
+          },
+          "refreshToken": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateAntithesisRequest": {
+        "required": [
+          "content"
+        ],
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateDialecticRequest": {
+        "required": [
+          "title",
+          "description",
+          "isPublic"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "isPublic": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CreateSynthesisRequest": {
+        "required": [
+          "content"
+        ],
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateThesisRequest": {
+        "required": [
+          "content"
+        ],
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          }
+        }
+      },
+      "ForgotPasswordRequest": {
+        "required": [
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "HttpValidationProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "errors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "InfoRequest": {
+        "type": "object",
+        "properties": {
+          "newEmail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "newPassword": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "oldPassword": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "InfoResponse": {
+        "required": [
+          "email",
+          "isEmailConfirmed"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "isEmailConfirmed": {
+            "type": "boolean"
+          }
+        }
+      },
+      "LoginRequest": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "twoFactorCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "twoFactorRecoveryCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "RefreshRequest": {
+        "required": [
+          "refreshToken"
+        ],
+        "type": "object",
+        "properties": {
+          "refreshToken": {
+            "type": "string"
+          }
+        }
+      },
+      "RegisterRequest": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "ResendConfirmationEmailRequest": {
+        "required": [
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "ResetPasswordRequest": {
+        "required": [
+          "email",
+          "resetCode",
+          "newPassword"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "resetCode": {
+            "type": "string"
+          },
+          "newPassword": {
+            "type": "string"
+          }
+        }
+      },
+      "TwoFactorRequest": {
+        "type": "object",
+        "properties": {
+          "enable": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "twoFactorCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "resetSharedKey": {
+            "type": "boolean"
+          },
+          "resetRecoveryCodes": {
+            "type": "boolean"
+          },
+          "forgetMachine": {
+            "type": "boolean"
+          }
+        }
+      },
+      "TwoFactorResponse": {
+        "required": [
+          "sharedKey",
+          "recoveryCodesLeft",
+          "isTwoFactorEnabled",
+          "isMachineRemembered"
+        ],
+        "type": "object",
+        "properties": {
+          "sharedKey": {
+            "type": "string"
+          },
+          "recoveryCodesLeft": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "recoveryCodes": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "isTwoFactorEnabled": {
+            "type": "boolean"
+          },
+          "isMachineRemembered": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateThesisRequest": {
+        "required": [
+          "content"
+        ],
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Identity"
+    },
+    {
+      "name": "Dialectics"
+    }
+  ]
+}
