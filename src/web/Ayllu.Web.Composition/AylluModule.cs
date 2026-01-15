@@ -217,6 +217,9 @@ public static class AylluModule
         var logger = scope.ServiceProvider.GetRequiredService<ILogger<ApplicationDbContext>>();
         try
         {
+            var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            CancellationToken c = CancellationToken.None;
+            if (!await context.Database.CanConnectAsync(c)) return;
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
 
