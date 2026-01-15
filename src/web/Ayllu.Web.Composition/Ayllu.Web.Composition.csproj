@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyVersion>0.0.1.0</AssemblyVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" /> 
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.1" />
+    <PackageReference Include="Quartz" Version="3.15.1" />
+    <PackageReference Include="Quartz.Extensions.DependencyInjection" Version="3.15.1" />
+    <PackageReference Include="Quartz.Extensions.Hosting" Version="3.15.1" />
+    <PackageReference Include="Quartz.Serialization.Json" Version="3.15.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ayllu.Web.Application\Ayllu.Web.Application.csproj" />
+    <ProjectReference Include="..\Ayllu.Web.Infrastructure\Ayllu.Web.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

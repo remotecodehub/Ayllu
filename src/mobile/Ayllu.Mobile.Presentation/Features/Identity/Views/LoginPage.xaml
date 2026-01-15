@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<uranium:UraniumContentPage
+    Title="Sign in"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:uranium="clr-namespace:UraniumUI.Pages;assembly=UraniumUI"
+    xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+    xmlns:vm="clr-namespace:Ayllu.Mobile.Presentation.Features.Identity.ViewModels"
+    x:Class="Ayllu.Mobile.Presentation.Features.Identity.Views.LoginPage"
+    x:DataType="vm:LoginViewModel"
+    x:Name="PageLogin">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="24"
+            Spacing="16"
+            HorizontalOptions="Center"
+            MaximumWidthRequest="420">
+
+            <Label
+                Text="Welcome back"
+                FontSize="24"
+                FontAttributes="Bold" />
+
+            <input:FormView SubmitCommand="{Binding LoginCommand}">
+
+                <Entry
+                    Placeholder="Email"
+                    Keyboard="Email"
+                    Text="{Binding Email}" />
+
+                <Entry
+                    Placeholder="Password"
+                    IsPassword="True"
+                    Text="{Binding Password}" />
+
+                <Button
+                    Text="Sign in"
+                    Command="{Binding LoginCommand}" />
+
+            </input:FormView>
+
+            <Button
+                Text="Forgot password?"
+                StyleClass="TextButton"
+                Command="{Binding ForgotPasswordCommand}" />
+
+            <Button
+                Text="Create account"
+                StyleClass="TextButton"
+                Command="{Binding RegisterCommand}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</uranium:UraniumContentPage>

@@ -1,0 +1,34 @@
+{
+  "descriptionHash": "F6825AC70D3EC1E5C789C69B2F6C4029C9FAF98830BD7ED7D5762E209E5DF8D0F5FB7F7705374D2DC2A3189474E72A7CFB4E778DA37931B88E0EDD88E820D39D",
+  "descriptionLocation": "../../web/Ayllu.Web/v1.json",
+  "lockFileVersion": "1.0.0",
+  "kiotaVersion": "1.29.0",
+  "clientClassName": "ApiClient",
+  "typeAccessModifier": "Public",
+  "clientNamespaceName": "Ayllu.Mobile.Client",
+  "language": "CSharp",
+  "usesBackingStore": false,
+  "excludeBackwardCompatible": false,
+  "includeAdditionalData": true,
+  "disableSSLValidation": false,
+  "serializers": [
+    "Microsoft.Kiota.Serialization.Json.JsonSerializationWriterFactory",
+    "Microsoft.Kiota.Serialization.Text.TextSerializationWriterFactory",
+    "Microsoft.Kiota.Serialization.Form.FormSerializationWriterFactory",
+    "Microsoft.Kiota.Serialization.Multipart.MultipartSerializationWriterFactory"
+  ],
+  "deserializers": [
+    "Microsoft.Kiota.Serialization.Json.JsonParseNodeFactory",
+    "Microsoft.Kiota.Serialization.Text.TextParseNodeFactory",
+    "Microsoft.Kiota.Serialization.Form.FormParseNodeFactory"
+  ],
+  "structuredMimeTypes": [
+    "application/json",
+    "text/plain;q=0.9",
+    "application/x-www-form-urlencoded;q=0.2",
+    "multipart/form-data;q=0.1"
+  ],
+  "includePatterns": [],
+  "excludePatterns": [],
+  "disabledValidationRules": []
+}

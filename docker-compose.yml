@@ -1,0 +1,81 @@
+services:
+  web:
+    image: ${DOCKER_REGISTRY-}ayllu
+    build:
+      context: .
+      dockerfile: ./src/web/Ayllu.Web/Dockerfile
+    networks:
+      - ayllunet
+    depends_on:
+      db:
+        condition: service_healthy
+      provisioner-db:
+        condition: service_completed_successfully
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+      ASPNETCORE_HTTP_PORTS: 80
+      ASPNETCORE_HTTPS_PORT: 443
+      ASPNETCORE_Kestrel__Endpoints__Https__Certificate__Path: /app/certs/ayllu.pfx
+      ASPNETCORE_Kestrel__Endpoints__Https__Certificate__Password: ${HTTPS_CERT_PASSWORD} 
+      ASPNETCORE_Kestrel__Endpoints__Https__Url: https://0.0.0.0:443
+      ConnectionStrings__DefaultConnection: Server=${DB_HOST};User Id=${DB_USER};Password=${DB_USER_PASSWORD};TrustServerCertificate=True;Initial Catalog=${DB_NAME}
+      Email__Smtp__Google__Password: ${EMAIL_PASSWORD}
+      Email__Smtp__Google__Username: ${EMAIL_USERNAME}
+      Email__Smtp__Google__UseSsl: ${EMAIL_USE_SSL}
+      Email__Smtp__Google__Host: ${EMAIL_HOST}
+      Email__Smtp__Google__Port: ${EMAIL_PORT}
+      Email__Smtp__Google__FromName: ${EMAIL_NAME_DISPLAY}
+      Email__Smtp__Google__FromEmail: ${FROM_EMAIL}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./certs/ayllu.pfx:/app/certs/ayllu.pfx:ro
+      - ./certs/ayllu.crt:/usr/local/share/ca-certificates/ayllu.pfx:ro
+      
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest 
+    environment:
+      SA_PASSWORD: ${SA_PASSWORD}
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
+    healthcheck:
+      test: ["CMD-SHELL", "timeout 1 bash -c '</dev/tcp/localhost/1433'"]
+      interval: 10s
+      timeout: 3s
+      retries: 20
+      start_period: 15s
+    networks:
+      - ayllunet
+    ports:
+      - "11433:1433"
+    volumes:
+      - sqlvolume:/var/opt/mssql
+
+  provisioner-db:
+    image: mcr.microsoft.com/mssql-tools
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - ayllunet 
+    environment:
+      DB_HOST: db
+      DB_PORT: 1433
+      SA_PASSWORD: "${SA_PASSWORD}"
+      APP_DB_NAME: "${DB_NAME}" 
+      APP_DB_USER: "${DB_USER}"
+      APP_DB_PASSWORD: "${DB_USER_PASSWORD}"
+      APP_DB_HOST: db
+    volumes:
+      - ./scripts/provision-db.sh:/provision-db.sh:ro
+    entrypoint: ["/bin/bash", "/provision-db.sh"]
+
+ 
+networks:
+  ayllunet:
+    driver: bridge
+
+volumes:
+  sqlvolume:
+    driver: local    
