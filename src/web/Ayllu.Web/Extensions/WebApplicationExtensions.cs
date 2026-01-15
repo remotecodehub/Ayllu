@@ -31,5 +31,10 @@ public static class WebApplicationExtensions
             throw new InvalidOperationException($"Error migrating database: {e.Message}", e);
         }
     }
-     
+    /// <summary>
+    /// Determines whether the current application environment is set to "Test".
+    /// </summary>
+    /// <param name="app">The <see cref="WebApplication"/> instance to check the environment for. Cannot be null.</param>
+    /// <returns>true if the application's environment name is "Test" (case-insensitive); otherwise, false.</returns>
+    public static bool IsTestEnvironment(this WebApplication app) => app.Environment.EnvironmentName.Equals("Test", StringComparison.InvariantCultureIgnoreCase);
 }

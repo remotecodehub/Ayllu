@@ -2,6 +2,7 @@
 using Ayllu.Web.Application.Common.Abstractions.Data;
 using Ayllu.Web.Application.Common.Abstractions.Dialectic;
 using Ayllu.Web.Application.Common.Abstractions.Email;
+using Ayllu.Web.Application.Common.Abstractions.Health;
 using Ayllu.Web.Application.Common.Abstractions.Identity;
 using Ayllu.Web.Application.Common.Abstractions.Storage;
 using Ayllu.Web.Application.Common.Abstractions.Synthesis;
@@ -17,6 +18,7 @@ using Ayllu.Web.Infrastructure.Common.Repositories.Common;
 using Ayllu.Web.Infrastructure.Common.Repositories.Identity;
 using Ayllu.Web.Infrastructure.Common.Services.Antithesis;
 using Ayllu.Web.Infrastructure.Common.Services.Dialectic;
+using Ayllu.Web.Infrastructure.Common.Services.Health;
 using Ayllu.Web.Infrastructure.Common.Services.Identity;
 using Ayllu.Web.Infrastructure.Common.Services.Synthesis;
 using Ayllu.Web.Infrastructure.Common.Services.Thesis;
@@ -25,6 +27,7 @@ using Ayllu.Web.Infrastructure.Communication.Email.Smtp;
 using Ayllu.Web.Infrastructure.Communication.Email.Templates;
 using Ayllu.Web.Infrastructure.Persistence.Data;
 using Ayllu.Web.Infrastructure.Persistence.Extensions;
+using Ayllu.Web.Infrastructure.Persistence.Options;
 using Ayllu.Web.Infrastructure.Persistence.Utils;
 using FluentValidation;
 using MediatR;
@@ -89,6 +92,15 @@ public static class AylluModule
         this IServiceCollection services,
         IConfiguration configuration)
     {
+        services.Configure<ConnectionStringsOptions>(
+           configuration.GetSection(ConnectionStringsOptions.SectionName));
+
+        services.AddOptions<ConnectionStringsOptions>()
+            .Bind(configuration.GetSection(ConnectionStringsOptions.SectionName))
+            .ValidateDataAnnotations()
+            .Validate(o => !string.IsNullOrEmpty(o.DefaultConnection), "Default Connection is a required connection string")
+            .ValidateOnStart();
+
         services.Configure<GoogleSmtpOptions>(
            configuration.GetSection(GoogleSmtpOptions.SectionName));
 
@@ -103,15 +115,15 @@ public static class AylluModule
         services.AddAuthentication();
         services.AddAuthorization(options =>
         {
-            options.AddPolicy("ScalarPolicy", policy =>
-            {
-                policy.RequireAssertion(context =>
-                {
-                    var httpContext = context.Resource as HttpContext;
-                    var token = httpContext?.Request.Headers["Authorization"].FirstOrDefault();
-                    return token == $"Bearer {configuration["Scalar:Token:Bearer"]}";
-                });
-            });
+            //options.AddPolicy("ScalarPolicy", policy =>
+            //{
+            //    policy.RequireAssertion(context =>
+            //    {
+            //        var httpContext = context.Resource as HttpContext;
+            //        var token = httpContext?.Request.Headers["Authorization"].FirstOrDefault();
+            //        return token == $"Bearer {configuration["Scalar:Token:Bearer"]}";
+            //    });
+            //});
         });
 
         services.ConfigureApplicationCookie(options =>
@@ -162,6 +174,7 @@ public static class AylluModule
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IApplicationUserFriendshipRepository, ApplicationUserFriendshipRepository>();
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        services.AddScoped<IHealthService, HealthService>();
         services.AddScoped<IAntithesisService, AntithesisService>();
         services.AddScoped<IDialecticService, DialecticService>();
         services.AddScoped<IIdentityService, IdentityService>();
