@@ -45,7 +45,7 @@ body:
     attributes:
       label: Exemplo mínimo reproduzível
       description: |
-        Por favor, forneça [o menor trecho de código completo](https://stackoverflow.com/help/minimal-reproducible-example) da requisilção éfetuada na API. Uma maneira fácil de começar é copiar [código de exemplo](https://github.com/remotecodehub/ayllu/tree/main/src/sdk/README.md) e o modificar de acordo com o seu cenário. 
+        Por favor, forneça [o menor trecho de código completo](https://stackoverflow.com/help/minimal-reproducible-example) da requisilção éfetuada na API. Uma maneira fácil de começar é copiar [código de exemplo](https://github.com/remotecodehub/ayllu/tree/main/src/sdk/Ayllu.Api.Sdk/README.md) e o modificar de acordo com o seu cenário. 
                 
         Se o resultado for muito extensivo, ou muitos arquivos, por favor:
 

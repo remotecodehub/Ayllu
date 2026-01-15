@@ -5,6 +5,18 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AssemblyVersion>0.0.1.0</AssemblyVersion>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Ayllu SDK</Title>
+    <Version>0.0.1</Version>
+    <Authors>Weslley Murdock</Authors>
+    <Company>Remote Code Hub</Company>
+    <Description>SDK da API REST do Ayllu</Description>
+    <PackageProjectUrl>https://github.com/remotecodehub/Ayllu</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/remotecodehub/Ayllu.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>ayllu;rest;api;kiota;</PackageTags>
+    <PackageReleaseNotes>First release</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +26,13 @@
     <PackageReference Include="Microsoft.Kiota.Serialization.Json" Version="1.21.1" />
     <PackageReference Include="Microsoft.Kiota.Serialization.Multipart" Version="1.21.1" />
     <PackageReference Include="Microsoft.Kiota.Serialization.Text" Version="1.21.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

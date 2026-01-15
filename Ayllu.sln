@@ -16,6 +16,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{F2EDFE53-22D8-4253-9061-C7A181AD1B3D}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yaml = .github\workflows\build.yaml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEMPLATE", "{9DD0D30B-2278-4B30-9EB3-E06ACB4140E5}"
 	ProjectSection(SolutionItems) = preProject
@@ -81,6 +84,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ayllu.Mobile.Client", "src\mobile\Ayllu.Mobile.Client\Ayllu.Mobile.Client.csproj", "{098A3633-606F-46B3-97DB-5930F9765265}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sdk", "sdk", "{3DFFFCE4-CB90-4306-9E6F-5790A8151642}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ayllu.Api.Sdk", "src\sdk\Ayllu.Api.Sdk\Ayllu.Api.Sdk.csproj", "{760E39C2-6B4A-A980-4EC6-85EAA67A11E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -237,6 +242,18 @@ Global
 		{098A3633-606F-46B3-97DB-5930F9765265}.Release|x64.Build.0 = Release|Any CPU
 		{098A3633-606F-46B3-97DB-5930F9765265}.Release|x86.ActiveCfg = Release|Any CPU
 		{098A3633-606F-46B3-97DB-5930F9765265}.Release|x86.Build.0 = Release|Any CPU
+		{760E39C2-6B4A-A980-4EC6-85EAA67A11E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{760E39C2-6B4A-A980-4EC6-85EAA67A11E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{760E39C2-6B4A-A980-4EC6-85EAA67A11E0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{760E39C2-6B4A-A980-4EC6-85EAA67A11E0}.Debug|x64.Build.0 = Debug|Any CPU
+		{760E39C2-6B4A-A980-4EC6-85EAA67A11E0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{760E39C2-6B4A-A980-4EC6-85EAA67A11E0}.Debug|x86.Build.0 = Debug|Any CPU
+		{760E39C2-6B4A-A980-4EC6-85EAA67A11E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{760E39C2-6B4A-A980-4EC6-85EAA67A11E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{760E39C2-6B4A-A980-4EC6-85EAA67A11E0}.Release|x64.ActiveCfg = Release|Any CPU
+		{760E39C2-6B4A-A980-4EC6-85EAA67A11E0}.Release|x64.Build.0 = Release|Any CPU
+		{760E39C2-6B4A-A980-4EC6-85EAA67A11E0}.Release|x86.ActiveCfg = Release|Any CPU
+		{760E39C2-6B4A-A980-4EC6-85EAA67A11E0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -259,6 +276,7 @@ Global
 		{9B661312-2CDC-20B6-3AA8-02DA2DB4C122} = {EA18760E-ED74-42D5-9740-395B79F5F7A6}
 		{098A3633-606F-46B3-97DB-5930F9765265} = {EA18760E-ED74-42D5-9740-395B79F5F7A6}
 		{3DFFFCE4-CB90-4306-9E6F-5790A8151642} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{760E39C2-6B4A-A980-4EC6-85EAA67A11E0} = {3DFFFCE4-CB90-4306-9E6F-5790A8151642}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3BD3208E-3881-4936-BA85-8CD446F8E643}
