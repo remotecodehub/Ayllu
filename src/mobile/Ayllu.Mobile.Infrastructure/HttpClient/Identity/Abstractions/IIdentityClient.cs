@@ -35,5 +35,5 @@ public interface IIdentityService
     Task UpdateUserInfoAsync(InfoRequest request, CancellationToken cancellationToken = default);
 
     // GET /api/v1/identity/me
-    Task<ProfileResponse?> GetCurrentUserAsync(CancellationToken cancellationToken = default);
+    //Task<ProfileResponse?> GetCurrentUserAsync(CancellationToken cancellationToken = default);
 }
