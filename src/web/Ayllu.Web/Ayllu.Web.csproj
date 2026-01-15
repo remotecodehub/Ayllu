@@ -11,16 +11,9 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <DocumentationFile>Ayllu.Web.xml</DocumentationFile>
     <AssemblyVersion>0.0.1.0</AssemblyVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
-  </PropertyGroup>
-     
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
@@ -28,14 +21,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.ApiDescription.Server" Version="10.0.2">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+ 
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
     <PackageReference Include="Scalar.AspNetCore" Version="2.12.6" />
     <PackageReference Include="Scalar.AspNetCore.Microsoft" Version="2.12.6" /> 
   </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\Ayllu.Web.Application\Ayllu.Web.Application.csproj" />
     <ProjectReference Include="..\Ayllu.Web.Composition\Ayllu.Web.Composition.csproj" />
