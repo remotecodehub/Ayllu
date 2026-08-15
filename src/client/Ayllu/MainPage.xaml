@@ -44,7 +44,7 @@
             </input:FormView>
         </material:BackdropView>
         <material:BottomSheetView x:Name="bottomSheet">
-            
+            <Label Text="AYLLU" />
         </material:BottomSheetView>
     </uranium:UraniumContentPage.Attachments>
 </uranium:UraniumContentPage>

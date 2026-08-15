@@ -4,5 +4,5 @@ namespace Ayllu;
 
 public static class MauiProgram
 {
-	public static MauiApp CreateMauiApp() => MauiApp.CreateBuilder().BuildAylluApp<App>();
+	public static MauiApp CreateMauiApp() => MauiApp.CreateBuilder().BuildAyllu<App>();
 }

@@ -10,7 +10,7 @@ public static  class MauiAppBuilderExtensions
 {
     extension(MauiAppBuilder builder)
     {
-        public MauiApp BuildAylluApp<T>() where T : Microsoft.Maui.Controls.Application
+        public MauiApp BuildAyllu<T>() where T : Microsoft.Maui.Controls.Application
         {
             builder
                 .UseMauiApp<T>()
