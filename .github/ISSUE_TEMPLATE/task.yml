@@ -1,0 +1,34 @@
+name: "TASK"
+description: "Representa uma porção de uma funcionalidade descrita em uma feature."
+title: "[TASK] "
+labels: ["task", "enhancement"]
+assignees: []
+type: "TASK"
+projects: ["default"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Task Description
+      description: |
+        Descreva o que deve ser implementado nesta task.
+      placeholder: "Explicar claramente o escopo da task."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Requisitos/Objetivos
+      description: |
+        Liste os goals dessa task.  
+        Exemplo:
+        - [ ] Implementar controller de identidade;
+        - [ ] Implementar testes de integração.
+        - [ ] Documentar implementação.
+      placeholder: |
+        - [ ] 
+        - [ ] 
+        - [ ] 
+    validations:
+      required: false
