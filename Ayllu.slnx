@@ -4,7 +4,14 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Folder Name="/Ayllu/" />
+  <Folder Name="/Ayllu/">
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="DependencyGraph.html" />
+    <File Path="dotnet-tools.json" />
+    <File Path="global.json" />
+    <File Path="LICENSE.md" />
+  </Folder>
   <File Path=".gitattributes" />
   <File Path=".gitignore" />
   <Folder Name="/Ayllu/.github/" />
@@ -21,14 +28,6 @@
   </Folder>
   <Folder Name="/Ayllu/scripts/">
     <File Path="scripts/cert-gen.ps1" />
-    <File Path="scripts/Generate-KiotaClient.ps1" />
-    <File Path="scripts/migrate-db.ps1" />
-    <File Path="scripts/provision-db.sh" />
-  </Folder>
-  <Folder Name="/Ayllu/scripts/sqlcmd/">
-    <File Path="scripts/sqlcmd/Dockerfile" />
-    <File Path="scripts/sqlcmd/run-provision.sh" />
-    <File Path="scripts/sqlcmd/tables_sqlServer.sql" />
   </Folder>
   <Folder Name="/Ayllu/src/" />
   <Folder Name="/Ayllu/src/client/">
