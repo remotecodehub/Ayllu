@@ -1,6 +1,6 @@
-﻿using Ayllu.Application.Dialectics.Requests;
+using Ayllu.Application.Dialectics.Requests;
 using Ayllu.Application.Dialectics.Responses;
-using MediatR;
+using Mediator.Net.Contracts;
 
 namespace Ayllu.Application.Dialectics.Commands;
 

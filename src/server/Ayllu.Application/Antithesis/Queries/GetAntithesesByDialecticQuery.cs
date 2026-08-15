@@ -1,5 +1,5 @@
-﻿using Ayllu.Application.Antithesis.Responses;
-using MediatR;
+using Ayllu.Application.Antithesis.Responses;
+using Mediator.Net.Contracts;
 
 namespace Ayllu.Application.Antithesis.Queries;
 

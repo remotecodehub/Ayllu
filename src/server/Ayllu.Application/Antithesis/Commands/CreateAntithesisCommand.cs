@@ -1,6 +1,6 @@
-﻿using Ayllu.Application.Antithesis.Requests;
+using Ayllu.Application.Antithesis.Requests;
 using Ayllu.Application.Antithesis.Responses;
-using MediatR;
+using Mediator.Net.Contracts;
 
 namespace Ayllu.Application.Antithesis.Commands;
 

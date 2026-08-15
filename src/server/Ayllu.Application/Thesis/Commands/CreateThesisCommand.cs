@@ -1,6 +1,6 @@
-﻿using Ayllu.Application.Thesis.Requests;
+using Ayllu.Application.Thesis.Requests;
 using Ayllu.Application.Thesis.Responses;
-using MediatR;
+using Mediator.Net.Contracts;
 
 namespace Ayllu.Application.Thesis.Commands;
 

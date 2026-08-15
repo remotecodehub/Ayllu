@@ -1,6 +1,6 @@
-﻿using Ayllu.Application.Synthesis.Requests;
+using Ayllu.Application.Synthesis.Requests;
 using Ayllu.Application.Synthesis.Responses;
-using MediatR;
+using Mediator.Net.Contracts;
 
 namespace Ayllu.Application.Synthesis.Commands;
 

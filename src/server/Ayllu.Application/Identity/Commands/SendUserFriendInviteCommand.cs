@@ -1,6 +1,6 @@
-﻿using Ayllu.Application.Identity.Requests;
+using Ayllu.Application.Identity.Requests;
 using Ayllu.Application.Identity.Responses;
-using MediatR;
+using Mediator.Net.Contracts;
 
 namespace Ayllu.Application.Identity.Commands;
 
