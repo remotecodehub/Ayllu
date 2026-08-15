@@ -53,11 +53,13 @@ public static class AylluModule
     private static IServiceCollection AddApplicationLayer(this IServiceCollection services)
     {
         services.AddValidatorsFromAssembly(typeof(GetCurrentUserQueryValidator).Assembly, includeInternalTypes: true);
-        services.AddSingleton<ValidationPipeSpecification>();
+        services.AddTransient<ValidationPipeSpecification>();
         services.AddMediator(builder =>
         {
             builder.RegisterHandlers(typeof(LogoutQuery).Assembly);
-            builder.ConfigureGlobalReceivePipe(pipe => pipe.AddPipeSpecification(new ValidationPipeSpecification(services.BuildServiceProvider())));
+            builder.ConfigureGlobalReceivePipe(pipe =>
+                pipe.AddPipeSpecification(pipe.DependencyScope?.Resolve<ValidationPipeSpecification>()
+                    ?? throw new InvalidOperationException("Mediator.Net validation pipeline could not be resolved.")));
         });
         return services;
     }
