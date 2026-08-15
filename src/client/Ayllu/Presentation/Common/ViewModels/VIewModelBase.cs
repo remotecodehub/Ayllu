@@ -1,6 +1,6 @@
 namespace Ayllu.Presentation.Common.ViewModels;
 
-public partial class VIewModelBase : ObservableObject 
+public abstract partial class ViewModelBase : ObservableObject 
 {
     [ObservableProperty]
     public partial bool IsBusy { get; set; } = false;

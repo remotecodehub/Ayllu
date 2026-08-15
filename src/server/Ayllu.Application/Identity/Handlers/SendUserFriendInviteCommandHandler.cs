@@ -7,11 +7,10 @@ using Mediator.Net.Contracts;
 namespace Ayllu.Application.Identity.Handlers;
 
 public sealed class SendUserFriendInviteCommandHandler(IIdentityService identityService)
-    : IRequestHandler<SendUserFriendInviteCommand, UserFriendInviteSentResponse>
+    : IRequestHandler<SendUserFriendInviteCommand, ApplicationUserFriendResponse>
 {
-    public async Task<UserFriendInviteSentResponse> Handle(IReceiveContext<SendUserFriendInviteCommand> context, CancellationToken cancellationToken)
+    public async Task<ApplicationUserFriendResponse> Handle(IReceiveContext<SendUserFriendInviteCommand> context, CancellationToken cancellationToken)
     {
-        await identityService.SendInviteUserFriendAsync(context.Message.UserId, context.Message.request.FriendId, cancellationToken);
-        return new UserFriendInviteSentResponse();
+        return await identityService.SendInviteUserFriendAsync(context.Message.UserId, context.Message.request.FriendId, cancellationToken);
     }
 }

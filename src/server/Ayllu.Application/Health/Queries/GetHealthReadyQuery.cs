@@ -3,4 +3,4 @@ using Mediator.Net.Contracts;
 
 namespace Ayllu.Application.Health.Queries;
 
-public sealed record GetHealthReadyQuery : IRequest<HealthCheckResponse>;
+public sealed record GetHealthReadyQuery : IRequest;

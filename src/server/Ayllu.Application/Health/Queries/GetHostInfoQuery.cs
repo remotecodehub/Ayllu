@@ -3,4 +3,4 @@ using Mediator.Net.Contracts;
 
 namespace Ayllu.Application.Health.Queries;
 
-public sealed record GetHostInfoQuery : IRequest<HealthCheckResponse>;
+public sealed record GetHostInfoQuery : IRequest;

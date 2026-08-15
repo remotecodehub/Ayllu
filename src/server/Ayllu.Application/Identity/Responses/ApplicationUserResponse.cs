@@ -1,6 +1,6 @@
 ﻿namespace Ayllu.Application.Identity.Responses;
 
-public sealed class ApplicationUserResponse
+public sealed class ApplicationUserResponse : IResponse
 
 {
     public ApplicationUserResponse()

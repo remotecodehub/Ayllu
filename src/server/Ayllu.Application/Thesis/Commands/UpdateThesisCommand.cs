@@ -9,4 +9,4 @@ public sealed record UpdateThesisCommand(
     UpdateThesisRequest Request,
     string UserId,
     string ThesisId
-) : IRequest<ThesisResponse>;
+) : IRequest;

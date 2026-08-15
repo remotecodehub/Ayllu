@@ -8,4 +8,4 @@ public sealed record CreateThesisCommand(
     string DialecticId,
     CreateThesisRequest Request,
     string UserId
-) : IRequest<ThesisResponse>;
+) : IRequest;

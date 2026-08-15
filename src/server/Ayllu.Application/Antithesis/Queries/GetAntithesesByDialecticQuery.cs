@@ -7,4 +7,4 @@ public sealed record GetAntithesesByDialecticQuery(
     string DialecticId,
     string UserId,
     bool PublicAntithesisOnly
-) : IRequest<AntithesisListResponse>;
+) : IRequest;

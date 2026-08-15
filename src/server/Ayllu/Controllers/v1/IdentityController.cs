@@ -18,15 +18,15 @@ public class IdentityController(IMediator mediator) : ControllerBase
     [HttpGet("me")]
     [Authorize]
     public async Task<IActionResult> GetCurrentUserAsync(CancellationToken cancellationToken)
-        => Ok(Result<ApplicationUserResponse>.Success(await mediator.RequestAsync<GetCurrentUserQuery, ApplicationUserResponse>(new GetCurrentUserQuery(User.FindFirstValue(ClaimTypes.NameIdentifier)!))));
+        => Ok(Result<ApplicationUserResponse>.Success(
+            await mediator.RequestAsync<GetCurrentUserQuery, ApplicationUserResponse>(
+            new GetCurrentUserQuery(User.FindFirstValue(ClaimTypes.NameIdentifier)!), cancellationToken)));
 
     [HttpPost("me")]
     [Authorize]
     public async Task<IActionResult> UpdateCurrentUserAsync([FromBody] UpdateUserRequest request, CancellationToken cancellationToken)
-        => Ok(Result<ApplicationUserResponse>.Success(await mediator.RequestAsync<UpdateUserCommand, ApplicationUserResponse>(new UpdateUserCommand(request, User.FindFirstValue(ClaimTypes.NameIdentifier)!))));
+        => Ok(Result<ApplicationUserResponse>.Success(
+            await mediator.RequestAsync<UpdateUserCommand, ApplicationUserResponse>(
+            new UpdateUserCommand(request, User.FindFirstValue(ClaimTypes.NameIdentifier)!), cancellationToken)));
 
-    [HttpGet("logout")]
-    [Authorize]
-    public async Task<IActionResult> LogoutUserAsync(CancellationToken cancellationToken)
-        => Ok(Result<bool>.Success(await mediator.RequestAsync<LogoutQuery, bool>(new LogoutQuery(User.FindFirstValue(ClaimTypes.NameIdentifier)!))));
 }

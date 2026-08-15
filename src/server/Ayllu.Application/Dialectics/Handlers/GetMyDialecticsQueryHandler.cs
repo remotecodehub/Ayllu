@@ -7,10 +7,10 @@ using Mediator.Net.Contracts;
 namespace Ayllu.Application.Dialectics.Handlers;
 
 public sealed class GetMyDialecticsQueryHandler(IDialecticService ds)
-    : IRequestHandler<GetMyDialecticsQuery, IReadOnlyList<DialecticSummaryResponse>>
+    : IRequestHandler<GetMyDialecticsQuery, DialecticSummaryListResponse>
 {
-    public async Task<IReadOnlyList<DialecticSummaryResponse>> Handle(IReceiveContext<GetMyDialecticsQuery> context, CancellationToken cancellationToken)
+    public async Task<DialecticSummaryListResponse> Handle(IReceiveContext<GetMyDialecticsQuery> context, CancellationToken cancellationToken)
     {
-        return await ds.GetMyDialecticsAsync(context.Message.UserId, cancellationToken);
+        return new (await ds.GetMyDialecticsAsync(context.Message.UserId, cancellationToken));
     }
 }

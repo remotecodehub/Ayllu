@@ -18,10 +18,15 @@ public class FriendsController(IMediator mediator) : ControllerBase
     [HttpPost]
     [Authorize]
     public async Task<IActionResult> AddFriendAsync([FromBody] SendUserFriendInviteRequest request, CancellationToken cancellationToken)
-        => Ok(Result<UserFriendInviteSentResponse>.Success(await mediator.RequestAsync<SendUserFriendInviteCommand, UserFriendInviteSentResponse>(new SendUserFriendInviteCommand(request, User.FindFirstValue(ClaimTypes.NameIdentifier)!))));
+        => Ok(Result<UserFriendInviteSentResponse>.Success(
+            await mediator.RequestAsync<SendUserFriendInviteCommand, UserFriendInviteSentResponse>(
+                new SendUserFriendInviteCommand(
+                    request, User.FindFirstValue(ClaimTypes.NameIdentifier)!), cancellationToken)));
 
     [HttpGet]
     [Authorize]
     public async Task<IActionResult> ListFriendsAsync(CancellationToken cancellationToken)
-        => Ok(Result<ICollection<ApplicationUserFriendResponse>>.Success(await mediator.RequestAsync<GetUserFriendsQuery, ICollection<ApplicationUserFriendResponse>>(new GetUserFriendsQuery(User.FindFirstValue(ClaimTypes.NameIdentifier)!))));
+        => Ok(Result<ApplicationUserFriendListResponse>
+                .Success(await mediator.RequestAsync<GetUserFriendsQuery, ApplicationUserFriendListResponse>(
+                    new GetUserFriendsQuery(User.FindFirstValue(ClaimTypes.NameIdentifier)!), cancellationToken)));
 }

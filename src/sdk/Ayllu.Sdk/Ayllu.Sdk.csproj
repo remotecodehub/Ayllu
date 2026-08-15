@@ -4,28 +4,30 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyVersion>0.0.1.0</AssemblyVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Ayllu SDK</Title>
-    <Version>0.0.1</Version>
-    <Authors>Weslley Murdock</Authors>
+    <Version>1.0.0</Version>
+    <Authors>Ayllu Developers</Authors>
     <Company>Remote Code Hub</Company>
-    <Description>SDK da API REST do Ayllu</Description>
+    <Description>Ayllu REST API .NET SDK.</Description>
     <PackageProjectUrl>https://github.com/remotecodehub/Ayllu</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/remotecodehub/Ayllu.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>ayllu;rest;api;kiota;</PackageTags>
+    <PackageTags>ayllu;rest;api;kiota;dialectics;open;source</PackageTags>
     <PackageReleaseNotes>First release</PackageReleaseNotes>
+    <PackageOutputPath>$(MSBuildProjectDir)</PackageOutputPath>
+    <IncludeSymbols>True</IncludeSymbols>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Kiota.Abstractions" Version="1.21.1" />
-    <PackageReference Include="Microsoft.Kiota.Http.HttpClientLibrary" Version="1.21.1" />
-    <PackageReference Include="Microsoft.Kiota.Serialization.Form" Version="1.21.1" />
-    <PackageReference Include="Microsoft.Kiota.Serialization.Json" Version="1.21.1" />
-    <PackageReference Include="Microsoft.Kiota.Serialization.Multipart" Version="1.21.1" />
-    <PackageReference Include="Microsoft.Kiota.Serialization.Text" Version="1.21.1" />
+    <PackageReference Include="Microsoft.Kiota.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Kiota.Http.HttpClientLibrary" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Kiota.Serialization.Form" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Kiota.Serialization.Json" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Kiota.Serialization.Multipart" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Kiota.Serialization.Text" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>

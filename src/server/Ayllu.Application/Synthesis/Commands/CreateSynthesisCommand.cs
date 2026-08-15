@@ -8,4 +8,4 @@ public sealed record CreateSynthesisCommand(
     string DialecticId,
     CreateSynthesisRequest Request,
     string UserId
-) : IRequest<SynthesisResponse>;
+) : IRequest;

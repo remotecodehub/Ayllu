@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
     <ProjectReference Include="..\Ayllu.Composition\Ayllu.Composition.csproj" />
@@ -28,6 +28,11 @@
     <UserSecretsId>8ffad36d-cdcb-4eb0-afdf-c93a38506081</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..\..</DockerfileContext>
+    <GenerateClient Condition="'$(GenerateClient)' == ''">false</GenerateClient>
+    <OpenApiGenerateDocuments>$(GenerateClient)</OpenApiGenerateDocuments>
+    <OpenApiGenerateDocumentsOnBuild>$(GenerateClient)</OpenApiGenerateDocumentsOnBuild>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <Version>1.0.0.0</Version>
   </PropertyGroup>
 
 
@@ -39,5 +44,25 @@
     <Error Condition="'$(MigrationName)' == ''" Text="Missing migration name. Example: dotnet build -t:AddMigration &quot;-p:Name=MyMigration&quot;" />
 
     <Exec Command="dotnet ef migrations add $(MigrationName) -s . -p ..\Ayllu.Infrastructure\ --output-dir ..\Ayllu.Infrastructure\Persistence\Migrations" />
+  </Target>
+  <Target Name="GenerateKiotaSDK" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug' And '$(GenerateClient)' == 'true'">
+    <PropertyGroup>
+      <OpenApiSpecPath>$(MSBuildProjectDirectory)\obj\$(MSBuildProjectName).json</OpenApiSpecPath>
+      <SdkOutputDir>$(MSBuildProjectDirectory)\..\..\sdk\Ayllu.Sdk\Cli\</SdkOutputDir>
+      <GetDocumentTool>$(PkgMicrosoft_Extensions_ApiDescription_Server)\tools\GetDocument.InsideMicrosoft.exe</GetDocumentTool>
+    </PropertyGroup>
+
+    <Message Text="[OpenAPI] Extracting OpenAPI spec to: $(OpenApiSpecPath)" Importance="high" />
+
+    <Exec Command="dotnet tool run dotnet-getdocument --assembly &quot;$(TargetPath)&quot; --output &quot;$(OpenApiSpecPath)&quot; --file-name &quot;$(TargetName)&quot;"
+          ContinueOnError="true"
+          StandardOutputImportance="low" />
+
+    <Message Text="[Kiota] Generating API SDK client at: $(SdkOutputDir)..." Importance="high" />
+
+    <Exec Command="kiota generate -l CSharp -c AylluClient -n Ayllu.Sdk.Cli -d &quot;$(OpenApiSpecPath)&quot; -o &quot;$(SdkOutputDir)&quot; --clean-output"
+          ContinueOnError="false" />
+
+    <Message Text="[Kiota] SDK successfully generated!" Importance="high" />
   </Target>
 </Project>

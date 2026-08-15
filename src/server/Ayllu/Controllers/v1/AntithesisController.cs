@@ -17,9 +17,11 @@ public class AntithesisController(IMediator mediator) : ControllerBase
 {
     [HttpPost]
     public async Task<IActionResult> CreateAntithesis(string dialecticId, [FromBody] CreateAntithesisRequest request, CancellationToken cancellationToken)
-        => Ok(await mediator.RequestAsync<CreateAntithesisCommand, AntithesisResponse>(new CreateAntithesisCommand(dialecticId, request, User.FindFirstValue(ClaimTypes.NameIdentifier)!)));
+        => Ok(await mediator.RequestAsync<CreateAntithesisCommand, AntithesisResponse>(
+            new CreateAntithesisCommand(dialecticId, request, User.FindFirstValue(ClaimTypes.NameIdentifier)!), cancellationToken));
 
     [HttpGet]
     public async Task<IActionResult> List(string dialecticId, [FromQuery(Name = "publicOnly")] bool? publicOnly, CancellationToken cancellationToken)
-        => Ok(await mediator.RequestAsync<GetAntithesesByDialecticQuery, AntithesisListResponse>(new GetAntithesesByDialecticQuery(dialecticId, User.FindFirstValue(ClaimTypes.NameIdentifier)!, publicOnly ?? true)));
+        => Ok(await mediator.RequestAsync<GetAntithesesByDialecticQuery, AntithesisListResponse>(
+            new GetAntithesesByDialecticQuery(dialecticId, User.FindFirstValue(ClaimTypes.NameIdentifier)!, publicOnly ?? true), cancellationToken));
 }

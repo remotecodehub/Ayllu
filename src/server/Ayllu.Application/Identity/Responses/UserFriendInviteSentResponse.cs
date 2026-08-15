@@ -1,5 +1,5 @@
 ﻿namespace Ayllu.Application.Identity.Responses;
 
-public sealed class UserFriendInviteSentResponse
+public sealed class UserFriendInviteSentResponse : IResponse
 {
 }

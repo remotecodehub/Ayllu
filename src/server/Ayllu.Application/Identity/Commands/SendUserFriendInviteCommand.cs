@@ -4,4 +4,4 @@ using Mediator.Net.Contracts;
 
 namespace Ayllu.Application.Identity.Commands;
 
-public sealed record SendUserFriendInviteCommand(SendUserFriendInviteRequest request, string UserId) : IRequest<UserFriendInviteSentResponse>;
+public sealed record SendUserFriendInviteCommand(SendUserFriendInviteRequest request, string UserId) : IRequest;

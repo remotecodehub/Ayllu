@@ -1,11 +1,13 @@
-﻿namespace Ayllu.Application.Antithesis.Responses;
+﻿using Mediator.Net.Contracts;
+
+namespace Ayllu.Application.Antithesis.Responses;
 
 public sealed record AntithesisResponse(
     string Id,
     string Content,
     string AuthorId,
     DateTimeOffset CreatedAt
-)
+) : IResponse
 {
     public static Func<Domain.Entities.Dialectics.Antithesis, AntithesisResponse> Projection
         => a

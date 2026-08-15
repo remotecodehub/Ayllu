@@ -16,9 +16,11 @@ public class ThesisController(IMediator mediator) : ControllerBase
 {
     [HttpPost]
     public async Task<IActionResult> PublishThesis([FromBody] CreateThesisRequest request, string dialecticId, CancellationToken cancellationToken)
-        => Ok(await mediator.RequestAsync<CreateThesisCommand, ThesisResponse>(new CreateThesisCommand(dialecticId, request, User.FindFirstValue(ClaimTypes.NameIdentifier)!)));
+        => Ok(await mediator.RequestAsync<CreateThesisCommand, ThesisResponse>(
+            new CreateThesisCommand(dialecticId, request, User.FindFirstValue(ClaimTypes.NameIdentifier)!), cancellationToken));
 
     [HttpPut("{thesisId}")]
     public async Task<IActionResult> UpdateThesis([FromBody] UpdateThesisRequest request, string dialecticId, string thesisId, CancellationToken cancellationToken)
-        => Ok(await mediator.RequestAsync<UpdateThesisCommand, ThesisResponse>(new UpdateThesisCommand(dialecticId, request, User.FindFirstValue(ClaimTypes.NameIdentifier)!, thesisId)));
+        => Ok(await mediator.RequestAsync<UpdateThesisCommand, ThesisResponse>(
+            new UpdateThesisCommand(dialecticId, request, User.FindFirstValue(ClaimTypes.NameIdentifier)!, thesisId), cancellationToken));
 }

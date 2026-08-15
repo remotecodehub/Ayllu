@@ -7,4 +7,4 @@ namespace Ayllu.Application.Dialectics.Commands;
 public sealed record CreateDialecticCommand(
     CreateDialecticRequest Request,
     string UserId
-) : IRequest<CreateDialecticResponse>;
+) : IRequest;

@@ -6,8 +6,8 @@ using Mediator.Net.Contracts;
 
 namespace Ayllu.Application.Identity.Handlers;
 
-public sealed class GetUserFriendsQueryHandler(IIdentityService @is) : IRequestHandler<GetUserFriendsQuery, ICollection<ApplicationUserFriendResponse>>
+public sealed class GetUserFriendsQueryHandler(IIdentityService @is) : IRequestHandler<GetUserFriendsQuery, ApplicationUserFriendListResponse>
 {
-    public Task<ICollection<ApplicationUserFriendResponse>> Handle(IReceiveContext<GetUserFriendsQuery> context, CancellationToken cancellationToken)
-        => @is.GetUserFriendsAsync(context.Message.UserId, cancellationToken);
+    public async Task<ApplicationUserFriendListResponse> Handle(IReceiveContext<GetUserFriendsQuery> context, CancellationToken cancellationToken)
+        => new (await @is.GetUserFriendsAsync(context.Message.UserId, cancellationToken));
 }

@@ -2,7 +2,7 @@
 
 namespace Ayllu.Application.Health.Responses;
 
-public sealed record HealthCheckResponse(IReadOnlyDictionary<string, IReadOnlyDictionary<string, object>> Entries, string Status, string Duration)
+public sealed record HealthCheckResponse(IReadOnlyDictionary<string, IReadOnlyDictionary<string, object>> Entries, string Status, string Duration) : IResponse
 {
     internal static HealthCheckResponse FromHealthReport(HealthReport healthReport)
     {

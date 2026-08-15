@@ -9,7 +9,7 @@ public sealed record DialecticSummaryResponse(
     ThesisResponse Thesis,
     int AntithesisCount,
     int SynthesisCount
-)
+) : IResponse
 {
     public static Expression<Func<Dialectic, DialecticSummaryResponse>> Projection
         => d => new DialecticSummaryResponse(
@@ -31,5 +31,14 @@ public sealed record DialecticSummaryResponse(
                 ),
             d.Antitheses.Count,
             d.Syntheses.Count
+        );
+}
+
+
+public sealed record DialecticSummaryListResponse(IReadOnlyCollection<DialecticSummaryResponse> DialecticSummaries) : IResponse
+{
+    public static Expression<Func<IReadOnlyCollection<Dialectic>, DialecticSummaryListResponse>> Projection
+        => dialectics => new DialecticSummaryListResponse(
+            dialectics.Select(DialecticSummaryResponse.Projection.Compile()).ToList()
         );
 }

@@ -8,7 +8,7 @@ public sealed record SynthesisResponse(
     DateTimeOffset CreatedAt,
     string DialecticId,
     string ThesisId
-)
+) : IResponse
 {
     public static Func<Domain.Entities.Dialectics.Synthesis, SynthesisResponse> Projection
         => s

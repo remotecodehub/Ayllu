@@ -8,7 +8,9 @@ using Ayllu.Application.Common.Abstractions.Storage;
 using Ayllu.Application.Common.Abstractions.Synthesis;
 using Ayllu.Application.Common.Abstractions.Thesis;
 using Ayllu.Application.Common.Abstractions.UnitOfWork;
-using Ayllu.Application.Common.Behaviours;
+using Ayllu.Application.Common.Mediator.Extensions;
+using Ayllu.Application.Common.Mediator.Middlewares;
+using Ayllu.Application.Dialectics.Commands;
 using Ayllu.Application.Identity.Queries;
 using Ayllu.Application.Identity.Validators;
 using Ayllu.Domain.Entities.Identity;
@@ -28,11 +30,12 @@ using Ayllu.Infrastructure.Persistence.Options;
 using Ayllu.Infrastructure.Persistence.Utils;
 using FluentValidation;
 using Mediator.Net;
+using Mediator.Net.MicrosoftDependencyInjection;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
 namespace Ayllu.Composition;
 
 /// <summary>
@@ -53,14 +56,11 @@ public static class AylluModule
     private static IServiceCollection AddApplicationLayer(this IServiceCollection services)
     {
         services.AddValidatorsFromAssembly(typeof(GetCurrentUserQueryValidator).Assembly, includeInternalTypes: true);
-        services.AddTransient<ValidationPipeSpecification>();
-        services.AddMediator(builder =>
-        {
-            builder.RegisterHandlers(typeof(LogoutQuery).Assembly);
-            builder.ConfigureGlobalReceivePipe(pipe =>
-                pipe.AddPipeSpecification(pipe.DependencyScope?.Resolve<ValidationPipeSpecification>()
-                    ?? throw new InvalidOperationException("Mediator.Net validation pipeline could not be resolved.")));
-        });
+        var builder = new MediatorBuilder();
+        builder.RegisterHandlers(typeof(CreateDialecticCommand).Assembly);
+        builder.ConfigureGlobalReceivePipe(pipe => pipe.UseLogging());
+        builder.ConfigureCommandReceivePipe(pipe => pipe.UseFluentValidation());
+        services.RegisterMediator(builder);
         return services;
     }
 

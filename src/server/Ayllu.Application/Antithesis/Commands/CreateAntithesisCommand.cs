@@ -8,4 +8,4 @@ public sealed record CreateAntithesisCommand(
     string DialecticId,
     CreateAntithesisRequest Request,
     string UserId
-) : IRequest<AntithesisResponse>;
+) : IRequest;

@@ -17,9 +17,9 @@ public class SynthesisController(IMediator mediator) : ControllerBase
 {
     [HttpPost]
     public async Task<IActionResult> CreateSynthesis(string dialecticId, [FromBody] CreateSynthesisRequest request, CancellationToken cancellationToken)
-        => Ok(await mediator.RequestAsync<CreateSynthesisCommand, SynthesisResponse>(new CreateSynthesisCommand(dialecticId, request, User.FindFirstValue(ClaimTypes.NameIdentifier)!)));
+        => Ok(await mediator.RequestAsync<CreateSynthesisCommand, SynthesisResponse>(new CreateSynthesisCommand(dialecticId, request, User.FindFirstValue(ClaimTypes.NameIdentifier)!), cancellationToken));
 
     [HttpGet]
     public async Task<IActionResult> List(string dialecticId, CancellationToken cancellationToken)
-        => Ok(await mediator.RequestAsync<GetSynthesesByDialecticQuery, SynthesisListResponse>(new GetSynthesesByDialecticQuery(dialecticId, User.FindFirstValue(ClaimTypes.NameIdentifier)!)));
+        => Ok(await mediator.RequestAsync<GetSynthesesByDialecticQuery, SynthesisListResponse>(new GetSynthesesByDialecticQuery(dialecticId, User.FindFirstValue(ClaimTypes.NameIdentifier)!), cancellationToken));
 }

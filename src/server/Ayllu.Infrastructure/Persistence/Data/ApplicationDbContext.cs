@@ -1,14 +1,4 @@
-﻿using Ayllu.Domain.Abstractions.Common;
-using Ayllu.Domain.Entities.Dialectics;
-using Ayllu.Domain.Entities.Groups;
-using Ayllu.Domain.Entities.Identity;
-using Ayllu.Domain.Entities;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
-
-namespace Ayllu.Infrastructure.Persistence.Data;
+﻿namespace Ayllu.Infrastructure.Persistence.Data;
 
 public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser, ApplicationRole, string, IdentityUserClaim<string>, ApplicationUserRole, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>(options)
 {

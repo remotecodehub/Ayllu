@@ -5,4 +5,4 @@ namespace Ayllu.Application.Dialectics.Queries;
 
 public sealed record GetFriendsDialecticsQuery(
     string UserId
-) : IRequest<DialecticListResponse>;
+) : IRequest;

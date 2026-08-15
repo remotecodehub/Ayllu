@@ -2,7 +2,7 @@
 
 public sealed record DialecticListResponse(
     IReadOnlyList<DialecticResponse> Items
-)
+) : IResponse
 {
     public static DialecticListResponse FromEntityList(IList<DialecticResponse> dialectics) => new([.. dialectics]);
     public static Func<ICollection<DialecticResponse>, DialecticListResponse> Projection 

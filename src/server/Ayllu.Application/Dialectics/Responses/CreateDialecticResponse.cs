@@ -2,4 +2,4 @@
 
 public sealed record CreateDialecticResponse(
     string DialecticId
-);
+) : IResponse;

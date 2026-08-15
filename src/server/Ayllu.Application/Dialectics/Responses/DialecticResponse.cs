@@ -10,7 +10,7 @@ public sealed record DialecticResponse(
     string Status,
     bool IsPublic,
     DateTimeOffset CreatedAt
-)
+) : IResponse
 {
     public static Expression<Func<Dialectic, DialecticResponse>> Projection
         => d 
