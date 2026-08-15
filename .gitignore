@@ -6,7 +6,7 @@
 */*.suo	
 **/*.cache
 **/*.log
-.vs		
+**/.vs/*		
 **/*.vspscc
 **/*.vssscc
 **/*.pdb
@@ -19,7 +19,7 @@
 **/*.ear
 **/*.iml
 /src/Ayllu.Github.Client/Github/Client/kiota-lock.json
-/.vs/Ayllu
+/.vs/
 .env
 *.cer
 *.crt

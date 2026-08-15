@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<uranium:UraniumContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:uranium="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             x:Class="Ayllu.MainPage"
+             xmlns:local="clr-namespace:Ayllu"
+             x:Name="page">
+    
+    <ScrollView>
+
+        <VerticalStackLayout Spacing="10">
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+    <uranium:UraniumContentPage.Attachments>
+        <material:BackdropView
+                Title="Add" 
+                IconImageSource="{FontImageSource FontFamily=MaterialSharp, Glyph={x:Static uranium:MaterialSharp.Add_circle}, Color={StaticResource OnPrimary}}"
+                BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray950}}">
+            <input:FormView Spacing="10" Padding="25,30" HorizontalOptions="Center" MaximumWidthRequest="400">
+                <material:TextField 
+                    Title="What to do?"
+                    TextColor="{StaticResource OnPrimary}"
+                    AccentColor="{StaticResource OnPrimary}"
+                    Icon="{FontImageSource FontFamily=MaterialSharp, Glyph={x:Static uranium:MaterialSharp.Sticky_note_2}}">
+                    <validation:RequiredValidation />
+                </material:TextField>
+
+                <material:CheckBox
+                    Text="Is done" Color="{StaticResource Primary}" 
+                    BorderColor="{StaticResource OnPrimary}" 
+                    Type="Filled" 
+                    TextColor="{StaticResource OnPrimary}" />
+                <Button 
+                    input:FormView.IsSubmitButton="True"
+                    Text="Add"
+                    StyleClass="ElevatedButton"/>
+            </input:FormView>
+        </material:BackdropView>
+        <material:BottomSheetView x:Name="bottomSheet">
+            
+        </material:BottomSheetView>
+    </uranium:UraniumContentPage.Attachments>
+</uranium:UraniumContentPage>
+
+

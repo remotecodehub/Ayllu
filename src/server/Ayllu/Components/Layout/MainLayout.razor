@@ -1,0 +1,42 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar>
+        <MudIconButton Icon="@Icons.Material.TwoTone.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudText Typo="Typo.body2">Ayllu - Construindo movimentos sociais</MudText>
+    </MudAppBar>
+    <MudDrawer @bind-Open="@_drawerOpen">
+        <MudNavMenu>
+            <MudNavLink Href="/" Match="NavLinkMatch.All">Home</MudNavLink>
+            <MudNavLink Href="/profile" Match="NavLinkMatch.Prefix">Perfil</MudNavLink>
+            <MudNavGroup Title="Administation" Expanded="true">
+                <MudNavLink Href="/content"  Match="NavLinkMatch.Prefix">Conteudo</MudNavLink>
+                <MudNavLink Href="/users"  Match="NavLinkMatch.Prefix">Usuarios</MudNavLink>
+                <MudNavLink Href="/security"  Match="NavLinkMatch.Prefix">Securança</MudNavLink>
+            </MudNavGroup>
+            <MudNavLink Href="/about"  Match="NavLinkMatch.Prefix">SObre</MudNavLink>
+        </MudNavMenu>
+    </MudDrawer>
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
+@code {
+    bool _drawerOpen = true;
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}
+
+<div id="blazor-error-ui" data-nosnippet >
+    An unhandled error has occurred.
+    <a href="." class="reload">Reload</a>
+    <span class="dismiss">🗙</span>
+</div>

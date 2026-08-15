@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ayllu.Composition\Ayllu.Composition.csproj" />
+    <ProjectReference Include="..\Ayllu.Application\Ayllu.Application.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
+
+    <PackageReference Include="MudBlazor" Version="9.8.0" />
+    <PackageReference Include="Scalar.AspNetCore" Version="2.16.20" />
+    <PackageReference Include="Scalar.AspNetCore.Microsoft" Version="2.16.20" /> 
+  </ItemGroup>
+  
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+  </PropertyGroup>
+
+
+  <Target Name="AddMigration">
+    <PropertyGroup>
+      <MigrationName>$(Name)</MigrationName>
+    </PropertyGroup>
+
+    <Error Condition="'$(MigrationName)' == ''" Text="Missing migration name. Example: dotnet build -t:AddMigration &quot;-p:Name=MyMigration&quot;" />
+
+    <Exec Command="dotnet ef migrations add $(MigrationName) -s . -p ..\Ayllu.Infrastructure\ --output-dir ..\Ayllu.Infrastructure\Persistence\Migrations" />
+  </Target>
+</Project>
