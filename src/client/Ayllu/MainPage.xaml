@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:uranium="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
              xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:m="clr-namespace:UraniumUI.Icons.MaterialSymbols;assembly=UraniumUI.Icons.MaterialSymbols"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
              x:Class="Ayllu.MainPage"
@@ -21,14 +22,14 @@
     <uranium:UraniumContentPage.Attachments>
         <material:BackdropView
                 Title="Add" 
-                IconImageSource="{FontImageSource FontFamily=MaterialSharp, Glyph={x:Static uranium:MaterialSharp.Add_circle}, Color={StaticResource OnPrimary}}"
+                IconImageSource="{FontImageSource FontFamily=MaterialSharp, Glyph={x:Static m:MaterialSharp.Add_circle}, Color={StaticResource OnPrimary}}"
                 BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray950}}">
             <input:FormView Spacing="10" Padding="25,30" HorizontalOptions="Center" MaximumWidthRequest="400">
                 <material:TextField 
                     Title="What to do?"
                     TextColor="{StaticResource OnPrimary}"
                     AccentColor="{StaticResource OnPrimary}"
-                    Icon="{FontImageSource FontFamily=MaterialSharp, Glyph={x:Static uranium:MaterialSharp.Sticky_note_2}}">
+                    Icon="{FontImageSource FontFamily=MaterialSharp, Glyph={x:Static m:MaterialSharp.Sticky_note_2}}">
                     <validation:RequiredValidation />
                 </material:TextField>
 
@@ -38,7 +39,7 @@
                     Type="Filled" 
                     TextColor="{StaticResource OnPrimary}" />
                 <Button 
-                    input:FormView.IsSubmitButton="True"
+                    Click="ShowBottomSheet"
                     Text="Add"
                     StyleClass="ElevatedButton"/>
             </input:FormView>
