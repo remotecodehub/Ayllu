@@ -1,107 +1,56 @@
 # AI implementation instructions
 
-- Atue como um Engenheiro de software Senior .NET 10.0.
-- Mantenha o padrão de um projeto por camada (Aplicação, Dominio ou Infraestrutura) em ambos projetos de client/server.
-- O unico projeto que não segue esse concern é o projeto `Ayllu.Sdk`.
+- Act as a Senior .NET 10.0 software engineer.
+- Keep one project per architectural layer (Application, Domain, Infrastructure) in both client and server solutions.
+- The only project outside this concern is `Ayllu.Sdk`.
+- Use Mediator.Net 5.0.0 for application message dispatching. Do not introduce MediatR.
 
-## Arquitetura
+## Architecture
 
-```mermaid
-flowchart TD
-    p0["🌍 Ayllu"]
-    p1["📦 Ayllu.Application"]
-    p2["📦 Ayllu.Composition"]
-    p3["📦 Ayllu.Domain"]
-    p4["📦 Ayllu.Infrastructure"]
-    p5["🛠️ Ayllu.Sdk"]
-    p0 --> p2
-    p0 --> p1
-    p1 --> p3
-    p2 --> p1
-    p2 --> p4
-    p4 --> p1
-    p4 --> p3
-```
+### Client
 
-## Fluxo de dados
+MAUI Presentation -> Ayllu.Application -> Ayllu.Infrastructure -> Ayllu.Sdk / external services.
 
-```text
-___________________________________________________________________________________________________________________________________
-|   CLIENT                                                                                                                         | 
-|   ________________________                        _________________________                       _______________________        |
-|   |        (MAUI)         |                      |      Application       |                      |    Infrastructure     |       |
-|   |     Presentation      |                      |                        |                      |     ______________    |       |
-|   |    ________________   |     Mediator.NET     |    _______________     |    Abstract          |    |   Services   |   |       |
-|   |    |    Views     |   | Commands & Requests  |    |   Handlers   |    |  Feature Service     |    |______________|   |       |
-|   |    ⌊______________⌋    |---------------------→|    ⌊______________⌋     |                     |     ____↑____↓____     |      |
-|   |     ___↓_____↑____    |                      |    ____↓___↑______     |---------------------→|    |  Ayllu.SDK   |   |       |
-|   |    |  View Models |   |                      |    |  Pipeline    |    |                      |    |  (REST API)  |   |       |
-|   |    ⌊______________⌋    |                      |    |  Middlewares |    |                      |    ⌊______________⌋    |      |
-|   |                       |                      |     ⌊______________⌋    |←---------------------|                       |       |
-|   ⌊________________________⌋                      ⌊________________________⌋     Http responses    ⌊_______________________⌋      |
-|                                                                                                                                   |
-|                                                                                                                                   |
-|___________________________________________________________________________________________________________________________________|
+Commands and requests must be handled through Mediator.Net. Keep domain rules in `Ayllu.Domain`; keep HTTP and external integrations in Infrastructure.
 
-___________________________________________________________________________________________________________________________________
-|   SERVER                                                                                                                         | 
-|    _______________________                       _________________________                       _______________________         |
-|   |   Presentation        |                      |      Application       |                      |                       |       | 
-|   |                       |                      |                        |                      |    Infrastructure     |       |
-|   |  _________________    |     MediatR          |     _______________    |    Application       |     ______________    |       |
-|   |  | TRequest       |   | Commands & Queries   |    |   Handlers   |    |  Feature Service     |    |   Services  |    |       |
-|   |  | ↪ Controllers |    |    From Requests     |    ⌊______________⌋    |    Abstraction       |   |_____________|     |      |
-|   |  | ↪ Razor Pages |    |---------------------→|         |  ↑           |---------------------→|     ___↑___↓______    |      |
-|   |  ⌊________________⌋    |                      |    _____↓__|____       |                      |    |   Repository |   |      |
-|   |       ____↓____       |                      |    |  Behaviors |      |                      |    ⌊______________⌋    |      |
-|   |      |TResponse|      |                      |    ⌊_____________⌋      |←---------------------|    _____↑___↓_____    |      |
-|   |      ⌊__________⌋      |←---------------------|                        |     Entity Results   |    |Unit of Work  |   |      |
-|   ⌊________________________⌋ Commands & Queries   ⌊________________________⌋     Model Mapped      |    ⌊______________⌋    |     |
-|         _____↓_______       Results -> TResponse                                                  ⌊_______________________⌋      |
-|        | OPENAPI     |                                                                                                           |
-|________⌊_____SPEC_____⌋___________________________________________________________________________________________________________|
+### Server
 
+ASP.NET Core Presentation (Controllers + Razor/Blazor) -> Ayllu.Application -> Ayllu.Infrastructure -> Ayllu.Domain.
 
-______________________________________________________________________________
-|   SERVER + CLIENT                                                           | 
-|    _______________________                 _______________________          |
-|   |   SERVER             |                |      AYLLU.SDK       |          |
-|   |                      |     Kiota      |    _______________   |          |          
-|   |  _________________   |---------------→|    |   SERVER     |  |          |
-|   |  | OpenAPI.json   |  |                |    |   REST HTTP  |  |          |
-|   |  ⌊________________⌋   |                |    |   CLIENT     |  |          |
-|   ⌊_______________________⌋                |    ⌊______________⌋   |          |
-|                ↖                          ⌊_______________________⌋         |  
-|                  \                       ↗                                  | 
-⌊                   \_____________________/                                   |                 
-|                    |                    |                                   |
-|                    |   CLIENT           |                                   |
-|                    |____________________|                                   |
-|                    |                    |                                   |
-|                    |  + Rest Services   |                                   |
-|                    |    (Ayllu.SDK)     |                                   |
-|                    ⌊_____________________⌋                                   | 
-|                                                                             |
-|_____________________________________________________________________________|
+Controllers and Razor pages must dispatch application commands/requests through `Mediator.Net.IMediator`. Application handlers own orchestration and depend on application abstractions; Infrastructure implements those abstractions.
 
+## Mediator.Net rules
 
-```
+- Use `Mediator.Net.Contracts.IRequest<TResponse>` for request/response messages.
+- Use `Mediator.Net.Contracts.ICommand` for commands without a response.
+- Use `Mediator.Net.Contracts.IEvent` for notifications/events.
+- Use `Mediator.Net.Contracts.IRequestHandler<TRequest,TResponse>` for request handlers.
+- Handlers receive `IReceiveContext<TMessage>` and `CancellationToken`.
+- Use `RequestAsync<TRequest,TResponse>` for `IRequest<TResponse>` messages.
+- Use `SendAsync` only for commands.
+- Use `PublishAsync` for events.
+- Register handlers from the Application assembly through `Mediator.Net.MicrosoftDependencyInjection`.
+- Cross-cutting concerns such as validation must be implemented as Mediator.Net pipe specifications, not MediatR `IPipelineBehavior`.
+- Never add a MediatR package, namespace, interface, handler or pipeline behavior.
 
-## Fluxo de exceção
+## Validation
 
-Todo o fluxo de dados iniciado com uma request em Presentation (via razor ou controller) deve estar envolto em instruções `try/catch/finally` para fins de logging/limpeza. Catches devem inserir log de erro e relançar a exceção original. Exceções propagam até o Exception Handler Global.
+Use FluentValidation 12.x. Validators belong to Application. Validation failures must continue to use the existing `ApplicationValidationException` and global exception handling semantics.
 
-O exception handler global traduz erros de validação, autorização, não-encontrado, conflito, persistencia ee falhas não esperadas para o pattern RFC `Problem Details` incluindo códigos HTTP apropriados.
+## Client build policy
 
-## Escrita e Formatação
+The MAUI client has a matrix build in GitHub Actions. Do not use the client matrix as the acceptance criterion for server tasks unless explicitly requested.
 
-- Preferir file-scoped namespaces.
-- Uma diretiva razor por linha.
-- Uma atribuição de váriavel por linha, exceto quando em atribuição 'tuplada'.
-- Não utilizar implmentações stubs ou TODO, bem como também não usar `throw new NotImplementedException()`
-- Usar construtores primários sempre que possível.
+## Server build policy
 
+For server changes, the authoritative CI criterion is the server build job. Always inspect the `build-web`/server job and its logs when validating a change. Do not treat client matrix failures as failures of a server-only change.
 
-## Documentação
+## Coding standards
 
-Toda implementação publica requer documentação completa em en-US usando documentação XML.
+- Prefer file-scoped namespaces.
+- One Razor directive per line.
+- Prefer primary constructors when appropriate.
+- Do not add stubs, TODO implementations, or `NotImplementedException`.
+- Public APIs require complete XML documentation in en-US.
+- Preserve existing behavior and public HTTP contracts when refactoring infrastructure/framework dependencies.
+- Keep exception propagation compatible with the global RFC Problem Details handler.

@@ -1,4 +1,4 @@
-﻿using Ayllu.Application.Common.Abstractions.Antithesis;
+using Ayllu.Application.Common.Abstractions.Antithesis;
 using Ayllu.Application.Common.Abstractions.Data;
 using Ayllu.Application.Common.Abstractions.Dialectic;
 using Ayllu.Application.Common.Abstractions.Email;
@@ -27,77 +27,50 @@ using Ayllu.Infrastructure.Persistence.Data;
 using Ayllu.Infrastructure.Persistence.Options;
 using Ayllu.Infrastructure.Persistence.Utils;
 using FluentValidation;
-using MediatR;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
+using Mediator.Net;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+
 namespace Ayllu.Composition;
 
-
 /// <summary>
-/// AylluModule is a static class that provides extension methods to register the Ayllu module in a web application.
+/// Registers the Ayllu application, infrastructure and mediator services.
 /// </summary>
 public static class AylluModule
 {
     /// <summary>
     /// Registers the Ayllu module in the provided service collection.
     /// </summary>
-    /// <param name="services">Colleciont of services from the builder</param>
-    /// <param name="configuration">Instance of configuration present in the builder</param>
-    /// <returns></returns>
-    /// <exception cref="InvalidOperationException"></exception>
-    public static IServiceCollection AddAylluModule(
-        this IServiceCollection services,
-        IConfiguration configuration)
+    public static IServiceCollection AddAylluModule(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddInfrastructureLayer(configuration);
         services.AddApplicationLayer();
         return services;
     }
 
-    /// <summary>
-    /// Adds the application layer services to the service collection.
-    /// </summary>
-    /// <param name="services">The collection of services from DI container</param> 
-    /// <returns>The service collection with the Application Layer set uo</returns>
     private static IServiceCollection AddApplicationLayer(this IServiceCollection services)
     {
-        services.AddMediatR(m => m.RegisterServicesFromAssemblyContaining<LogoutQuery>());
         services.AddValidatorsFromAssembly(typeof(GetCurrentUserQueryValidator).Assembly, includeInternalTypes: true);
-        services.AddTransient(
-            typeof(IPipelineBehavior<,>),
-            typeof(ValidationBehavior<,>)
-        );
+        services.AddSingleton<ValidationPipeSpecification>();
+        services.AddMediator(builder =>
+        {
+            builder.RegisterHandlers(typeof(LogoutQuery).Assembly);
+            builder.ConfigureGlobalReceivePipe(pipe => pipe.AddPipeSpecification(new ValidationPipeSpecification(services.BuildServiceProvider())));
+        });
         return services;
     }
 
-    /// <summary>
-    /// Adds the infrastructure layer services to the service collection.
-    /// </summary>
-    /// <param name="services">The collection of services from DI Container</param>
-    /// <param name="configuration">The instance of <see cref="IConfiguration"/> with the settings for the app</param>
-    /// <returns>The <see cref="IServiceCollection"/> instance with the setup of configurations and settings for services</returns>
-    /// <exception cref="InvalidOperationException">Throws when the connections string are missing</exception>
-    private static IServiceCollection AddInfrastructureLayer(
-        this IServiceCollection services,
-        IConfiguration configuration)
+    private static IServiceCollection AddInfrastructureLayer(this IServiceCollection services, IConfiguration configuration)
     {
-        services.Configure<ConnectionStringsOptions>(
-           configuration.GetSection(ConnectionStringsOptions.SectionName));
-
+        services.Configure<ConnectionStringsOptions>(configuration.GetSection(ConnectionStringsOptions.SectionName));
         services.AddOptions<ConnectionStringsOptions>()
             .Bind(configuration.GetSection(ConnectionStringsOptions.SectionName))
             .ValidateDataAnnotations()
             .Validate(o => !string.IsNullOrEmpty(o.DefaultConnection), "Default Connection is a required connection string")
             .ValidateOnStart();
-
-        services.Configure<GoogleSmtpOptions>(
-           configuration.GetSection(GoogleSmtpOptions.SectionName));
-
+        services.Configure<GoogleSmtpOptions>(configuration.GetSection(GoogleSmtpOptions.SectionName));
         services.AddOptions<GoogleSmtpOptions>()
             .Bind(configuration.GetSection(GoogleSmtpOptions.SectionName))
             .ValidateDataAnnotations()
@@ -107,27 +80,13 @@ public static class AylluModule
             .Validate(o => !string.IsNullOrWhiteSpace(o.Port.ToString()), "SMTP port is required")
             .ValidateOnStart();
         services.AddAuthentication();
-        services.AddAuthorization(options =>
-        {
-            //options.AddPolicy("ScalarPolicy", policy =>
-            //{
-            //    policy.RequireAssertion(context =>
-            //    {
-            //        var httpContext = context.Resource as HttpContext;
-            //        var token = httpContext?.Request.Headers["Authorization"].FirstOrDefault();
-            //        return token == $"Bearer {configuration["Scalar:Token:Bearer"]}";
-            //    });
-            //});
-        });
-
+        services.AddAuthorization();
         services.ConfigureApplicationCookie(options =>
         {
             options.Cookie.SameSite = SameSiteMode.None;
             options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
         });
-
         var connectionString = configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Missing Connection string ConnectionStrings:DefaultConnection");
-
         services.AddDbContext<ApplicationDbContext>(options =>
         {
             options.UseSqlServer(connectionString, dbOptions =>
@@ -138,8 +97,6 @@ public static class AylluModule
                 dbOptions.CommandTimeout(90);
             });
         });
-
-        // Configura Identity
         services.AddSingleton<IEmailTemplateRenderer, EmailTemplateRenderer>();
         services.AddSingleton<IEmailSender<ApplicationUser>, GoogleSmtpEmailSender>();
         services.AddHttpContextAccessor();
@@ -150,20 +107,15 @@ public static class AylluModule
             options.Password.RequireLowercase = true;
             options.Password.RequireUppercase = true;
             options.Password.RequireNonAlphanumeric = true;
-
             options.SignIn.RequireConfirmedEmail = true;
-
             options.User.RequireUniqueEmail = true;
-            options.User.AllowedUserNameCharacters =
-                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-";
+            options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-";
         })
         .AddRoles<ApplicationRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultTokenProviders()
         .AddApiEndpoints()
         .AddSignInManager<SignInManager<ApplicationUser>>();
-
-        // services
         services.AddScoped<IApplicationDbMigrator, ApplicationDbMigrator>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IApplicationUserFriendshipRepository, ApplicationUserFriendshipRepository>();
@@ -174,34 +126,6 @@ public static class AylluModule
         services.AddScoped<IIdentityService, IdentityService>();
         services.AddScoped<ISynthesisService, SynthesisService>();
         services.AddScoped<IThesisService, ThesisService>();
-        // Quartz
-        //services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
-        //services.AddSingleton<IJobFactory, ScopedJobFactory>();
-        //services.AddQuartz(q =>
-        //{
-        //    // Define o tipo de serializador
-        //    q.SetProperty("quartz.serializer.type", "json");
-
-        //    q.UsePersistentStore(store =>
-        //    {
-        //        store.UseProperties = true;
-        //        store.UseSqlServer(sql =>
-        //        {
-        //            sql.ConnectionString = configuration.GetConnectionString("QuartzConnection") ?? throw new InvalidOperationException("Missing Connection string ConnectionStrings:QuartzConnection");
-        //            sql.TablePrefix = "QRTZ_";
-        //        });
-        //    });
-
-        //    q.UseJobFactory<ScopedJobFactory>();
-
-        //    // Cleanup expired JwtTokens
-        //    // JobKey cleanupJobKey = new("TokenCleanupJob");
-        //    // q.AddJob<TokenCleanupJob>(opts => opts.WithIdentity(cleanupJobKey));
-        //    // q.AddTrigger(opts => opts
-        //    //     .ForJob(cleanupJobKey)
-        //    //     .WithIdentity("TokenCleanupJob-trigger")
-        //    //     .WithCronSchedule("0 0 0 * * ?")); // 00:00 UTC
-        //});
         return services;
-    } 
+    }
 }

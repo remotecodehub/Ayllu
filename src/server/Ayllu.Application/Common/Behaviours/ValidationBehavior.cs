@@ -6,7 +6,7 @@ using Mediator.Net.Contracts;
 namespace Ayllu.Application.Common.Behaviours;
 
 /// <summary>
-/// Mediator.Net pipeline specification that validates incoming messages with registered FluentValidation validators.
+/// Validates incoming Mediator.Net messages with their registered FluentValidation validators.
 /// </summary>
 public sealed class ValidationPipeSpecification(IServiceProvider serviceProvider)
     : IPipeSpecification<IReceiveContext<IMessage>>
@@ -25,19 +25,15 @@ public sealed class ValidationPipeSpecification(IServiceProvider serviceProvider
         var validationContext = new ValidationContext<object>(context.Message);
         var result = await validator.ValidateAsync(validationContext, cancellationToken);
         var failure = result.Errors.FirstOrDefault();
-
         if (failure is not null)
         {
             throw new ApplicationValidationException(failure.ErrorCode, failure.ErrorMessage);
         }
     }
 
-    public Task Execute(IReceiveContext<IMessage> context, CancellationToken cancellationToken)
-        => Task.CompletedTask;
+    public Task Execute(IReceiveContext<IMessage> context, CancellationToken cancellationToken) => Task.CompletedTask;
 
-    public Task AfterExecute(IReceiveContext<IMessage> context, CancellationToken cancellationToken)
-        => Task.CompletedTask;
+    public Task AfterExecute(IReceiveContext<IMessage> context, CancellationToken cancellationToken) => Task.CompletedTask;
 
-    public void OnException(Exception ex, IReceiveContext<IMessage> context)
-        => throw ex;
+    public Task OnException(Exception ex, IReceiveContext<IMessage> context) => Task.CompletedTask;
 }
