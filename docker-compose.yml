@@ -1,24 +1,23 @@
 services:
-  web:
+  server:
     image: ${DOCKER_REGISTRY-}ayllu
     build:
       context: .
-      dockerfile: ./src/web/Ayllu.Web/Dockerfile
+      dockerfile: ./src/server/Ayllu/Dockerfile
     networks:
-      - ayllunet
+      - net
     depends_on:
       db:
         condition: service_healthy
-      provisioner-db:
-        condition: service_completed_successfully
     environment:
       ASPNETCORE_ENVIRONMENT: Docker
       ASPNETCORE_HTTP_PORTS: 80
       ASPNETCORE_HTTPS_PORT: 443
+      ASPNETCORE_URLS: "https://+:443;http://+:80"
+      ASPNETCORE_Kestrel__Endpoints__Https__Url: "https://*:443"
       ASPNETCORE_Kestrel__Endpoints__Https__Certificate__Path: /app/certs/ayllu.pfx
       ASPNETCORE_Kestrel__Endpoints__Https__Certificate__Password: ${HTTPS_CERT_PASSWORD} 
-      ASPNETCORE_Kestrel__Endpoints__Https__Url: https://0.0.0.0:443
-      ConnectionStrings__DefaultConnection: Server=${DB_HOST};User Id=${DB_USER};Password=${DB_USER_PASSWORD};TrustServerCertificate=True;Initial Catalog=${DB_NAME}
+      ConnectionStrings__DefaultConnection: Server=db;Database=${APP_DB_NAME};User Id=${APP_DB_USER};Password=${APP_DB_PASSWORD};TrustServerCertificate=True;
       Email__Smtp__Google__Password: ${EMAIL_PASSWORD}
       Email__Smtp__Google__Username: ${EMAIL_USERNAME}
       Email__Smtp__Google__UseSsl: ${EMAIL_USE_SSL}
@@ -31,51 +30,82 @@ services:
       - "443:443"
     volumes:
       - ./certs/ayllu.pfx:/app/certs/ayllu.pfx:ro
-      - ./certs/ayllu.crt:/usr/local/share/ca-certificates/ayllu.pfx:ro
-      
+      - ./certs/ayllu.crt:/usr/local/share/ca-certificates/ayllu.crt:ro
+
   db:
-    image: mcr.microsoft.com/mssql/server:2022-latest 
+    image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
       SA_PASSWORD: ${SA_PASSWORD}
       ACCEPT_EULA: "Y"
       MSSQL_PID: "Express"
+      APP_DB_NAME: ${APP_DB_NAME}
+      APP_DB_USER: ${APP_DB_USER}
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD}
+    entrypoint:
+      - /bin/bash
+      - -c
+      - |
+        SQLCMD="/opt/mssql-tools18/bin/sqlcmd"
+        if [ ! -f "$$SQLCMD" ]; then
+            SQLCMD="/opt/mssql-tools/bin/sqlcmd"
+        fi
+        echo "🚀 Starting SQL Server in background..."
+        /opt/mssql/bin/sqlservr &
+        PID=$$!
+        echo "🔄 Waiting for SQL Server..."
+        until $$SQLCMD -S localhost -U sa -P "$$SA_PASSWORD" -C -Q "SELECT 1" >/dev/null 2>&1; do
+          sleep 2
+        done
+        echo "🎲 Creating database..."
+        $$SQLCMD -S localhost -U sa -P "$$SA_PASSWORD" -C -Q "
+        IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'$$APP_DB_NAME')
+        BEGIN
+            CREATE DATABASE [$$APP_DB_NAME];
+        END
+        "
+        echo "🗝️ Creating login.."
+        $$SQLCMD -S localhost -U sa -P "$$SA_PASSWORD" -C -Q "
+        IF NOT EXISTS (SELECT name FROM sys.server_principals WHERE name = N'$$APP_DB_USER')
+        BEGIN
+            CREATE LOGIN [$$APP_DB_USER] WITH PASSWORD = N'$$APP_DB_PASSWORD', CHECK_POLICY = OFF;
+        END
+        "
+        echo "🙋🏻 Creating user.."
+        $$SQLCMD -S localhost -U sa -P "$$SA_PASSWORD" -d "$$APP_DB_NAME" -C -Q "
+        IF NOT EXISTS (SELECT name FROM sys.database_principals WHERE name = N'$$APP_DB_USER')
+        BEGIN
+            CREATE USER [$$APP_DB_USER] FOR LOGIN [$$APP_DB_USER];
+        END
+        IF NOT EXISTS (
+            SELECT dp.name
+            FROM sys.database_principals dp
+            JOIN sys.database_role_members drm ON dp.principal_id = drm.member_principal_id
+            JOIN sys.database_principals roles ON drm.role_principal_id = roles.principal_id
+            WHERE dp.name = N'$$APP_DB_USER' AND roles.name = 'db_owner'
+        )
+        BEGIN
+            EXEC sp_addrolemember N'db_owner', N'$$APP_DB_USER';
+        END
+        "
+        echo "✅ Done provisioning!"
+        wait $$PID
     healthcheck:
-      test: ["CMD-SHELL", "timeout 1 bash -c '</dev/tcp/localhost/1433'"]
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$SA_PASSWORD\" -C -Q \"SELECT 1\" || $$SQLCMD -S localhost -U sa -P \"$SA_PASSWORD\" -C -Q \"SELECT 1\" || exit 1"]
       interval: 10s
-      timeout: 3s
-      retries: 20
+      timeout: 5s
+      retries: 10
       start_period: 15s
     networks:
-      - ayllunet
+      - net
     ports:
       - "11433:1433"
     volumes:
-      - sqlvolume:/var/opt/mssql
+      - sql:/var/opt/mssql
 
-  provisioner-db:
-    image: mcr.microsoft.com/mssql-tools
-    depends_on:
-      db:
-        condition: service_healthy
-    networks:
-      - ayllunet 
-    environment:
-      DB_HOST: db
-      DB_PORT: 1433
-      SA_PASSWORD: "${SA_PASSWORD}"
-      APP_DB_NAME: "${DB_NAME}" 
-      APP_DB_USER: "${DB_USER}"
-      APP_DB_PASSWORD: "${DB_USER_PASSWORD}"
-      APP_DB_HOST: db
-    volumes:
-      - ./scripts/provision-db.sh:/provision-db.sh:ro
-    entrypoint: ["/bin/bash", "/provision-db.sh"]
-
- 
 networks:
-  ayllunet:
+  net:
     driver: bridge
 
 volumes:
-  sqlvolume:
-    driver: local    
+  sql:
+    driver: local

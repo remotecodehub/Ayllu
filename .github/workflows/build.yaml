@@ -31,7 +31,7 @@ jobs:
           dotnet-version: 10.0.x
           
       - name: Instalar workloads MAUI
-        run: dotnet workload install maui
+        run: ${{ matrix.target.os != 'ubuntu-latest' && 'dotnet workload install maui' || 'dotnet workload install maui-android' }}
 
       - name: Setup Java JDK (Android only)
         if: matrix.target.framework == 'net10.0-android'
@@ -41,7 +41,7 @@ jobs:
           java-version: '17'
 
       - name: Select Xcode Version (Apple platforms only)
-        if: matrix.os == 'macos-26' 
+        if: matrix.target.os == 'macos-26' 
         run: |
           sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
           xcodebuild -version
@@ -64,10 +64,7 @@ jobs:
       - uses: actions/setup-dotnet@v6
         with:
           dotnet-version: 10.0.x
-
-      - name: Restore workloads
-        run: dotnet workload restore
-
+ 
       - name: Restore packages
         working-directory: ${{ github.workspace }}/src/server/Ayllu
         run: dotnet restore Ayllu.csproj

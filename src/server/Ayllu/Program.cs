@@ -76,12 +76,7 @@ app.MapScalarApiReference("scalar/ayllu", options =>
         .SortOperationsByMethod()
         .PreserveSchemaPropertyOrder();
 });
-
-if (!app.Environment.IsProduction())
-{
-    await app.Seed();
-}
-
+ 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

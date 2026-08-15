@@ -141,15 +141,12 @@ Este documento Markdown contém o grafo interativo e flexível do projeto `.cspr
             <button id="btn-sync-target" class="btn-sync-action" style="display: none;" onclick="initTargetWorkspacePermission()">Vincular Pasta Local</button>
         </div>
     </div>
-
     <div class="graph-container-box">
         <div id="cy-target" class="cy-canvas"></div>
-
-        <div id="loading-target" class="loading-overlay-box">
+           <div id="loading-target" class="loading-overlay-box">
             <div class="spinner-box"></div>
             <p id="loading-text-target" style="color: #b0b0c6; font-size: 14px;">Verificando estrutura do diretório...</p>
         </div>
-
         <div id="welcome-message-target" class="loading-overlay-box" style="display: none;">
             <div class="setup-zone-box" onclick="initTargetWorkspacePermission()">
                 <svg style="width:48px;height:48px;color:#594ae2;margin-bottom:12px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
