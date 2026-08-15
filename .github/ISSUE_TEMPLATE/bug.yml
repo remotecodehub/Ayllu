@@ -1,5 +1,5 @@
 name: "Bug"
-description: "Reporte um bug ou mal comportamento vinculada à uma ou um conjunto de features"
+description: "Reporte um bug ou mal comportamento encontrado em uma taks ou features"
 title: "[BUG] "
 labels: ["bug"]
 projects: ["default"]
@@ -10,8 +10,8 @@ body:
   - type: input
     id: api-version
     attributes:
-      label: Versão da API 
-      description: "Versão da apí onde o erro ocorre (obter em /api/v1/healthcheck/host). e.g.: 0.0.1.0"
+      label: API Version 
+      description: "Versao da API onde o erro ocorre (obter em /api/v1/healthcheck/host). e.g.: 0.0.1.0"
       placeholder: "0.0.1.0"
     validations:
       required: true
@@ -21,12 +21,12 @@ body:
     attributes:
       label: Ambiente
       description: |
-        Em qual ambiente o erro ocorre. Para confirmar o ambiente, execute uma requisição em GET /api/v1/healthcheck/host
+        Em qual ambiente o erro ocorre. Para confirmar o ambiente, execute uma request em GET /api/v1/healthcheck/host
       options:
         - Development (Visual Studio)
         - Docker (docker-compose.yml)
-        - Development (https://dev.ayllu.remotecodehub.com/)
-        - Test (https://test.ayllu.remotecodehub.com/)
+        - Development (https://dev-ayllu.gdhub.xyz/)
+        - Test (https://test-ayllu.gdhub.xyz/)
         - Production (https://ayllu.org/)
     validations:
       required: true
@@ -34,24 +34,25 @@ body:
   - type: textarea
     id: description
     attributes:
-      label: Detalhes da Implementação
+      label: Logs
       description: |
-        Descreva o que deve ser implementado nesta feature.
-      placeholder: "Explicar claramente o escopo da feature."
+        NÃ£o cole o log aqui, crie uma gist com o log e cole a url aqui.
+      placeholder: "https://gist.github.com/weslleymurdock/7b61edf403943bc6308424dadfbd4e84"
     validations:
       required: true
 
   - type: textarea
     attributes:
-      label: Exemplo mínimo reproduzível
+      label: Exemplo observado
       description: |
-        Por favor, forneça [o menor trecho de código completo](https://stackoverflow.com/help/minimal-reproducible-example) da requisilção éfetuada na API. Uma maneira fácil de começar é copiar [código de exemplo](https://github.com/remotecodehub/ayllu/tree/main/src/sdk/Ayllu.Api.Sdk/README.md) e o modificar de acordo com o seu cenário. 
+        Por favor, disponibilize [o menor trecho de codigo completo](https://stackoverflow.com/help/minimal-reproducible-example) da request realizada.
+        Uma maneira simples de iniciar seria copiando o [codigo de exemplo](https://github.com/remotecodehub/ayllu/tree/main/src/sdk/Ayllu.Api.Sdk/README.md) e o modificar de acordo com o seu requisito. 
                 
         Se o resultado for muito extensivo, ou muitos arquivos, por favor:
 
-        - _Anexe_ (não copie e cole) para esse campo, _ou_
+        - _Anexe_ (nao copie e cole) para esse campo, _ou_
         - Transforme em uma [Gist](https://gist.github.com) e referencie aqui o link da mesma, _ou_
-        - Disponibilize um link para um repositório publico, novo ou existente com o código de reprodução desse bug e referencie o repositório aqui.
+        - Disponibilize um link para um repositorio publico, novo ou existente com o codigo que reproduz esse bug e referencie o repositorio aqui.
     validations:
       required: true
 

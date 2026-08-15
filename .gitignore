@@ -24,3 +24,4 @@
 *.cer
 *.crt
 *.pfx
+workload-install.ps1
