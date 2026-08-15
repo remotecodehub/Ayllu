@@ -51,7 +51,7 @@ jobs:
 
       - name: Restore packages
         working-directory: ${{ github.workspace }}/src/client/Ayllu/
-        run: dotnet restore Ayllu.csproj  --framework ${{ matrix.target.framework }} ${{ matrix.target.runtime && format('--runtime {0}', matrix.target.runtime) }} 
+        run: dotnet restore Ayllu.csproj  ${{ matrix.target.runtime && format('--runtime {0}', matrix.target.runtime) }} 
 
       - name: Build
         working-directory: ${{ github.workspace }}/src/client/Ayllu/
