@@ -105,6 +105,9 @@
                 <button class="mud-button-root mud-btn mud-btn-outlined mud-btn-outlined-primary mud-ripple px-4 py-2 rounded font-weight-medium" style="color: #8e8eb2; border-color: #33334c;" onclick="resetLayout()">
                     <span class="mud-button-label">Reorganizar Layout</span>
                 </button>
+                <button id="btn-copy-markdown" class="mud-button-root mud-btn mud-btn-outlined mud-btn-outlined-primary mud-ripple px-4 py-2 rounded font-weight-medium" style="color: #8e8eb2; border-color: #33334c;" onclick="copyMarkdownGraph()" disabled>
+                    <span class="mud-button-label">Copiar Markdown</span>
+                </button>
                 <button id="btn-sync" class="mud-button-root mud-btn mud-btn-filled mud-ripple px-6 py-2 rounded font-weight-medium" style="background-color: #594ae2; display: none;" onclick="initWorkspacePermission()">
                     <span class="mud-button-label">Vincular Pasta Local</span>
                 </button>
@@ -329,7 +332,61 @@
             });
             cyInstance.ready(() => {
                 document.getElementById('loading').style.display = 'none';
+                document.getElementById('btn-copy-markdown').disabled = false;
             });
+        }
+
+        function markdownEscape(value) {
+            return value.replace(/([\\\[\]"`])/g, '\\$1');
+        }
+
+        function generateMarkdownGraph() {
+            if (!cyInstance) return '';
+
+            const nodes = cyInstance.nodes().toArray();
+            const nodeIds = new Map(nodes.map((node, index) => [node.id(), `p${index}`]));
+            const lines = [
+                '# Arquitetura de dependências',
+                '',
+                '```mermaid',
+                'flowchart TD'
+            ];
+
+            for (const node of nodes) {
+                lines.push(`    ${nodeIds.get(node.id())}["${markdownEscape(node.data('label'))}"]`);
+            }
+
+            for (const edge of cyInstance.edges()) {
+                const source = nodeIds.get(edge.data('source'));
+                const target = nodeIds.get(edge.data('target'));
+                if (source && target) lines.push(`    ${source} --> ${target}`);
+            }
+
+            lines.push('```', '');
+            return lines.join('\n');
+        }
+
+        async function copyMarkdownGraph() {
+            const markdown = generateMarkdownGraph();
+            if (!markdown) return;
+
+            try {
+                await navigator.clipboard.writeText(markdown);
+            } catch (err) {
+                const textArea = document.createElement('textarea');
+                textArea.value = markdown;
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                textArea.remove();
+            }
+
+            const buttonLabel = document.querySelector('#btn-copy-markdown .mud-button-label');
+            const originalLabel = buttonLabel.innerText;
+            buttonLabel.innerText = 'Markdown copiado!';
+            setTimeout(() => { buttonLabel.innerText = originalLabel; }, 1800);
         }
 
         function resetLayout() {
@@ -347,6 +404,7 @@
 
         window.initWorkspacePermission = initWorkspacePermission;
         window.resetLayout = resetLayout;
+        window.copyMarkdownGraph = copyMarkdownGraph;
     </script>
 </body>
 </html>
