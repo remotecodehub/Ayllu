@@ -6,7 +6,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="12.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.11">
       <PrivateAssets>all</PrivateAssets>
@@ -14,7 +13,10 @@
     </PackageReference>
 
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
-
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Server" Version="10.*">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="MudBlazor" Version="9.8.0" />
     <PackageReference Include="Scalar.AspNetCore" Version="2.16.20" />
     <PackageReference Include="Scalar.AspNetCore.Microsoft" Version="2.16.20" /> 
@@ -54,14 +56,11 @@
 
     <Message Text="[OpenAPI] Extracting OpenAPI spec to: $(OpenApiSpecPath)" Importance="high" />
 
-    <Exec Command="dotnet tool run dotnet-getdocument --assembly &quot;$(TargetPath)&quot; --output &quot;$(OpenApiSpecPath)&quot; --file-name &quot;$(TargetName)&quot;"
-          ContinueOnError="true"
-          StandardOutputImportance="low" />
+    <Exec Command="dotnet tool run dotnet-getdocument --assembly &quot;$(TargetPath)&quot; --output &quot;$(OpenApiSpecPath)&quot; --file-name &quot;$(TargetName)&quot;" ContinueOnError="true" StandardOutputImportance="low" />
 
     <Message Text="[Kiota] Generating API SDK client at: $(SdkOutputDir)..." Importance="high" />
 
-    <Exec Command="kiota generate -l CSharp -c AylluClient -n Ayllu.Sdk.Cli -d &quot;$(OpenApiSpecPath)&quot; -o &quot;$(SdkOutputDir)&quot; --clean-output"
-          ContinueOnError="false" />
+    <Exec Command="kiota generate -l CSharp -c AylluClient -n Ayllu.Sdk.Cli -d &quot;$(OpenApiSpecPath)&quot; -o &quot;$(SdkOutputDir)&quot; --clean-output" ContinueOnError="false" />
 
     <Message Text="[Kiota] SDK successfully generated!" Importance="high" />
   </Target>
