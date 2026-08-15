@@ -1,56 +1,32 @@
 name: "Build"
 
 on:
-  push:
+  push: 
     branches: 
       - main   
-  pull_request:  
+  pull_request:
+    types:
+       - opened
+       - synchronize
+       - reopened 
   workflow_dispatch:
 
 jobs: 
-  build-mobile:
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        target:
-          - { framework: net10.0-android }
-          - { framework: net10.0-ios, runtime: iossimulator-arm64 }
-      fail-fast: false
-     
+  server:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
         with:
           dotnet-version: 10.0.x
-          
-      - name: Instalar workloads MAUI
-        run: dotnet workload install maui
-
-      - name: Restore workloads
-        run: dotnet workload restore
-
+ 
       - name: Restore packages
-        run: dotnet restore ${{ github.workspace }}/src/mobile/Ayllu/Ayllu.csproj
+        working-directory: ${{ github.workspace }}/src/server/Ayllu
+        run: dotnet restore Ayllu.csproj
 
       - name: Build
-        run: dotnet build ${{ github.workspace }}/src/mobile/Ayllu/Ayllu.csproj --configuration Release --framework ${{ matrix.target.framework }} ${{ matrix.target.runtime && format('--runtime {0}', matrix.target.runtime) }} --no-restore
-
-  build-web:
-    runs-on: macos-15
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 10.0.x
-
-      - name: Restore workloads
-        run: dotnet workload restore
-
-      - name: Restore packages
-        run: dotnet restore ${{ github.workspace }}/src/web/Ayllu.Web/Ayllu.Web.csproj
-
-      - name: Build
-        run: dotnet build ${{ github.workspace }}/src/web/Ayllu.Web/Ayllu.Web.csproj --configuration Release --framework net10.0 --no-restore
+        working-directory: ${{ github.workspace }}/src/server/Ayllu
+        run: dotnet build Ayllu.csproj --configuration Release --framework net10.0 --no-restore
 
 
   

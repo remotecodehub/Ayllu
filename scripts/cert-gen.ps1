@@ -1,18 +1,33 @@
+function Test-Admin {
+    $currentUser = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $principal = New-Object Security.Principal.WindowsPrincipal($currentUser)
+    return $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+}
+
+# Solicitar elevaÃ§Ã£o se nÃ£o estiver como admin
+if (-not (Test-Admin)) {
+    Write-Error "Este script precisa ser executado como Administrador."
+    Start-Process powershell.exe "-File `"$PSCommandPath`" $($MyInvocation.UnboundArguments)" -Verb RunAs
+    exit
+}
+
 # Solicita os dados do certificado
 $subjectName = Read-Host "Digite o nome do certificado (ex: CN=ayllu.local)"
 $validYears = Read-Host "Digite a validade em anos (ex: 2)"
 $pfxPassword = Read-Host "Digite a senha para proteger o arquivo PFX"
-$certName = Read-Host "Digite o nome do arquivo a ser gerado sem extensão de arquivo"
-# Define caminhos de saída
+$certName = Read-Host "Digite o nome do arquivo"
+$dns = $subjectName -replace "CN=", ""
 $rootFolder = Resolve-Path "$PSScriptRoot\..\"
 $certFolder = Join-Path "$rootFolder\certs"
 New-Item -ItemType Directory -Path $certFolder -Force | Out-Null
 $cerPath = "$certFolder\$certName.cer"
 $pfxPath = "$certFolder\$certName.pfx"
+$crtPath = "$certFolder\$certName.crt"
 
 # Cria o certificado autoassinado
 $cert = New-SelfSignedCertificate `
     -Subject $subjectName `
+    -DnsName $dns, "localhost", "127.0.0.1" `
     -CertStoreLocation "Cert:\LocalMachine\My" `
     -KeyExportPolicy Exportable `
     -KeySpec Signature `
@@ -20,13 +35,18 @@ $cert = New-SelfSignedCertificate `
     -HashAlgorithm sha256 `
     -NotAfter (Get-Date).AddYears([int]$validYears)
 
-# Exporta o certificado público (.cer)
+# Exporta oz certificadoz (.cer, .pfx, .crt)
 Export-Certificate -Cert $cert -FilePath $cerPath
-
-# Exporta o certificado completo (.pfx)
 Export-PfxCertificate -Cert $cert -FilePath $pfxPath -Password (ConvertTo-SecureString -String $pfxPassword -Force -AsPlainText)
+Export-Certificate -Cert $cert -FilePath $crtPath
 
-# Adiciona o certificado à loja de Autoridades Confiáveis
+# Converter .crt binÃ¡rio (DER) -> PEM (Base64)
+$bytes = [System.IO.File]::ReadAllBytes($crtPath)
+$base64 = [System.Convert]::ToBase64String($bytes, [System.Base64FormattingOptions]::InsertLineBreaks)
+$pemContent = "-----BEGIN CERTIFICATE-----`n$base64`n-----END CERTIFICATE-----"
+[System.IO.File]::WriteAllText($crtPath, $pemContent)
+
+# Adiciona o certificado na loja de Autoridades Confiaveis
 $store = New-Object System.Security.Cryptography.X509Certificates.X509Store("Root","LocalMachine")
 $store.Open("ReadWrite")
 $store.Add($cert)
@@ -34,4 +54,3 @@ $store.Close()
 
 Write-Host "Certificado gerado e registrado com sucesso!"
 Write-Host "Arquivos salvos em: $certFolder"
-Write-Host "Use o arquivo PFX em sua aplicação ASP.NET com a senha fornecida."

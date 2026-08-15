@@ -4,57 +4,51 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Folder Name="/.github/" />
-  <Folder Name="/.github/ISSUE_TEMPLATE/">
+  <Folder Name="/Ayllu/">
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="DependencyGraph.html" />
+    <File Path="dotnet-tools.json" />
+    <File Path="global.json" />
+    <File Path="LICENSE.md" />
+  </Folder>
+  <File Path=".gitattributes" />
+  <File Path=".gitignore" />
+  <Folder Name="/Ayllu/.github/" />
+  <Folder Name="/Ayllu/.github/ISSUE_TEMPLATE/">
     <File Path=".github/ISSUE_TEMPLATE/bug.yml" />
     <File Path=".github/ISSUE_TEMPLATE/feature.yml" />
     <File Path=".github/ISSUE_TEMPLATE/featureset.yml" />
   </Folder>
-  <Folder Name="/.github/workflows/">
+  <Folder Name="/Ayllu/.github/workflows/">
     <File Path=".github/workflows/build.yaml" />
   </Folder>
-  <Folder Name="/certs/">
+  <Folder Name="/Ayllu/certs/">
     <File Path="certs/ayllu.pfx" />
   </Folder>
-  <Folder Name="/Itens de Solução/">
-    <File Path=".gitattributes" />
-    <File Path=".gitignore" />
-  </Folder>
-  <Folder Name="/scripts/">
+  <Folder Name="/Ayllu/scripts/">
     <File Path="scripts/cert-gen.ps1" />
-    <File Path="scripts/Generate-KiotaClient.ps1" />
-    <File Path="scripts/migrate-db.ps1" />
-    <File Path="scripts/provision-db.sh" />
   </Folder>
-  <Folder Name="/scripts/sqlcmd/">
-    <File Path="scripts/sqlcmd/Dockerfile" />
-    <File Path="scripts/sqlcmd/run-provision.sh" />
-    <File Path="scripts/sqlcmd/tables_sqlServer.sql" />
-  </Folder>
-  <Folder Name="/Solution Items/">
-    <File Path=".gitignore" />
-  </Folder>
-  <Folder Name="/src/" />
-  <Folder Name="/src/mobile/">
-    <File Path="src/mobile/Directory.Build.props" />
-    <Project Path="src/mobile/Ayllu.Mobile.Application/Ayllu.Mobile.Application.csproj" />
-    <Project Path="src/mobile/Ayllu.Mobile.Client/Ayllu.Mobile.Client.csproj" />
-    <Project Path="src/mobile/Ayllu.Mobile.Composition/Ayllu.Mobile.Composition.csproj" />
-    <Project Path="src/mobile/Ayllu.Mobile.Domain/Ayllu.Mobile.Domain.csproj" />
-    <Project Path="src/mobile/Ayllu.Mobile.Infrastructure/Ayllu.Mobile.Infrastructure.csproj" />
-    <Project Path="src/mobile/Ayllu.Mobile.Presentation/Ayllu.Mobile.Presentation.csproj">
+  <Folder Name="/Ayllu/src/" />
+  <Folder Name="/Ayllu/src/client/">
+    <File Path="src/client/Directory.Build.props" />
+    <Project Path="src/client/Ayllu.Application/Ayllu.Application.csproj" />
+    <Project Path="src/client/Ayllu.Composition/Ayllu.Composition.csproj" />
+    <Project Path="src/client/Ayllu.Domain/Ayllu.Domain.csproj" />
+    <Project Path="src/client/Ayllu.Infrastructure/Ayllu.Infrastructure.csproj" />
+    <Project Path="src/client/Ayllu/Ayllu.csproj">
       <Deploy Solution="Debug|Any CPU" />
     </Project>
   </Folder>
-  <Folder Name="/src/sdk/">
-    <Project Path="src/sdk/Ayllu.Api.Sdk/Ayllu.Api.Sdk.csproj" />
+  <Folder Name="/Ayllu/src/sdk/">
+    <Project Path="src/sdk/Ayllu.Sdk/Ayllu.Sdk.csproj" />
   </Folder>
-  <Folder Name="/src/web/">
-    <Project Path="src/web/Ayllu.Web.Application/Ayllu.Web.Application.csproj" />
-    <Project Path="src/web/Ayllu.Web.Composition/Ayllu.Web.Composition.csproj" />
-    <Project Path="src/web/Ayllu.Web.Domain/Ayllu.Web.Domain.csproj" />
-    <Project Path="src/web/Ayllu.Web.Infrastructure/Ayllu.Web.Infrastructure.csproj" />
-    <Project Path="src/web/Ayllu.Web/Ayllu.Web.csproj" />
+  <Folder Name="/Ayllu/src/server/">
+    <Project Path="src/server/Ayllu.Application/Ayllu.Application.csproj" />
+    <Project Path="src/server/Ayllu.Composition/Ayllu.Composition.csproj" />
+    <Project Path="src/server/Ayllu.Domain/Ayllu.Domain.csproj" />
+    <Project Path="src/server/Ayllu.Infrastructure/Ayllu.Infrastructure.csproj" />
+    <Project Path="src/server/Ayllu/Ayllu.csproj" />
   </Folder>
   <Project Path="docker-compose.dcproj">
     <Platform Project="AnyCPU" />

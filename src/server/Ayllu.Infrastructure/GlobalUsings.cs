@@ -1,0 +1,9 @@
+global using Ayllu.Domain.Abstractions.Common;
+global using Ayllu.Domain.Entities.Dialectics;
+global using Ayllu.Domain.Entities.Groups;
+global using Ayllu.Domain.Entities.Identity;
+global using Ayllu.Domain.Entities;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore;
+global using System.Linq.Expressions;

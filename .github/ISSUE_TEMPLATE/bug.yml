@@ -23,7 +23,7 @@ body:
       description: |
         Em qual ambiente o erro ocorre. Para confirmar o ambiente, execute uma request em GET /api/v1/healthcheck/host
       options:
-        - Development (Visual Studio)
+        - Local-Development (Visual Studio)
         - Docker (docker-compose.yml)
         - Development (https://dev-ayllu.gdhub.xyz/)
         - Test (https://test-ayllu.gdhub.xyz/)
